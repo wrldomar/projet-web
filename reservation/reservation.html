@@ -3,46 +3,84 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GreenHarvest - Vegetable & Fruit Event Reservation</title>
     <link rel="stylesheet" href="rescss.css" />
-    <title>GreenHarvest</title>
   </head>
   <body>
-    <header>
-      <div class="header-content">
-        <div class="left-content">
-          <a href="#home" class="link">Home</a>
-          <a href="#shop" class="link">Shop</a>
-        </div>
-        <div class="logo">
-          <h1>
-            <span class="green">Green</span><span class="harvest">Harvest</span>
-          </h1>
-        </div>
-        <div class="right-content">
-          <a href="#events" class="link">Events</a>
-          <a href="#contact" class="link">Contact</a>
-        </div>
-      </div>
-    </header>
-
-    <div class="main-container">
-      <main>
-        <div class="content">
-          <h1>CULTIVATE</h1>
-          <h2>Fresh from Our Fields to Your Table</h2>
-          <p>
-            Discover the taste of farm-fresh vegetables grown with care and
-            delivered to you. Enjoy quality produce that’s as nutritious as it
-            is delicious—straight from our fields, for a healthier, greener
-            lifestyle.
-          </p>
-          <button>Shop Now</button>
-          <div class="produce-images">
-            <img src="Rectangle 4.png" alt="Vegetable Image 1" />
-            <img src="Rectangle 5.png" alt="Vegetable Image 2" />
-          </div>
-        </div>
-      </main>
+    <div class="header-bar">
+      <h1 class="site-title">GreenHarvest</h1>
+      <nav>
+        <button onclick="location.href='#'">Home</button>
+        <button onclick="location.href='#'">Contact</button>
+        <button onclick="location.href='#'">Shop</button>
+      </nav>
     </div>
+
+    <header></header>
+
+    <section class="reservation-form">
+      <h2>Reserve Your Spot</h2>
+      <!-- Form starts here -->
+      <form action="submit_form.php" method="POST">
+        <label for="first-name">First Name</label>
+        <input
+          type="text"
+          id="first-name"
+          name="first-name"
+          placeholder="Your First Name"
+          required
+        />
+
+        <label for="last-name">Last Name</label>
+        <input
+          type="text"
+          id="last-name"
+          name="last-name"
+          placeholder="Your Last Name"
+          required
+        />
+
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Your Email"
+          required
+        />
+
+        <label for="phone">Phone Number</label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          placeholder="Your Phone Number"
+          required
+        />
+
+        <label for="tickets">Number of Tickets</label>
+        <input
+          type="number"
+          id="tickets"
+          name="tickets"
+          min="1"
+          max="100"
+          placeholder="Enter number of tickets"
+          required
+        />
+
+        <div class="button-group">
+          <button type="submit" class="reserve-btn">Reserve Now</button>
+          <button type="button" class="cancel-btn" onclick="location.href='#'">
+            Cancel
+          </button>
+        </div>
+      </form>
+      <!-- Form ends here -->
+    </section>
+
+    <footer>
+      <p>&copy; 2024 GreenHarvest. All rights reserved.</p>
+    </footer>
   </body>
 </html>
