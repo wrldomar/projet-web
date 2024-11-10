@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panier</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background">
+        <div class="cart-container">
+            <div class="cart-header">My Cart</div>
+
+            <div class="cart-item" data-price="10">
+                <div class="cart-item-info">
+                    <div class="cart-item-name">Article 1</div>
+                    <div class="cart-item-price">10 TND</div>
+                </div>
+                <div class="cart-item-quantity">
+                    <button class="quantity-button">-</button>
+                    <input type="text" value="1" readonly>
+                    <button class="quantity-button">+</button>
+                </div>
+                <button class="remove-button">Remove</button>
+            </div>
+
+            <div class="cart-item" data-price="15">
+                <div class="cart-item-info">
+                    <div class="cart-item-name">Article 2</div>
+                    <div class="cart-item-price">15 TND</div>
+                </div>
+                <div class="cart-item-quantity">
+                    <button class="quantity-button">-</button>
+                    <input type="text" value="1" readonly>
+                    <button class="quantity-button">+</button>
+                </div>
+                <button class="remove-button">Remove</button>
+            </div>
+
+            
+            <div class="cart-total">Total : <span id="total-price">25 TND</span></div>
+
+            <button class="checkout-button">Continue</button>
+        </div>
+    </div>
+</body>
+</html>

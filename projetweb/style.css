@@ -1,0 +1,146 @@
+/* Style général pour le panier */
+.cart-container {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    width: 40%;
+}
+
+/* En-tête du panier */
+.cart-header {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Ligne d'article */
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+/* Détails de l'article */
+.cart-item-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-item-name {
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+}
+
+.cart-item-price {
+    font-size: 14px;
+    color: #777;
+}
+
+/* Quantité */
+.cart-item-quantity {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 0 5px;
+    transition: background-color 0.3s;
+}
+
+.quantity-button:hover {
+    background-color: #0056b3;
+}
+
+.cart-item-quantity input {
+    width: 40px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 4px;
+    font-size: 14px;
+}
+
+/* Prix total */
+.cart-total {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: right;
+    margin-top: 20px;
+    color: #333;
+}
+
+/* Bouton de suppression */
+.remove-button {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.remove-button:hover {
+    background-color: #c82333;
+}
+
+/* Bouton de validation */
+.checkout-button {
+    display: block;
+    width: 100%;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.checkout-button:hover {
+    background-color: #218838;
+}
+
+.background {
+    /* background-image: url('sunny.jpg'); */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    border: 15px solid white;
+    align-items: center; 
+    display: flex;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}
