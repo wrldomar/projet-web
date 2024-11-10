@@ -1,0 +1,207 @@
+body {
+    background-image: url('bg1.png');
+  }
+/* Header Section */
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.733); 
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%; 
+    z-index: 10;
+    height: 70px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+    border-bottom: 2px solid #000000; /* Adds a green line under the navbar */
+  }
+  
+  /* Logo Styling */
+  .logo {
+    display: flex;
+    align-items: center; /* Align logo and text vertically */
+    font-family: 'NewYork', serif;
+    font-size: 36px;
+    text-align: center;
+    margin: 0;
+    color: rgb(0, 0, 0); 
+  }
+  
+  .green {
+    color: green;
+  }
+  
+  .harvest {
+    color: black;
+  }
+  
+  .nav-logo {
+    width: 30px; /* Adjust the size of the logo */
+    height: auto;
+    margin-left: 10px; /* Adds space between the logo and text */
+    transition: transform 0.3s ease; /* Animation when hovering over the logo */
+  }
+  
+  .nav-logo:hover {
+    transform: scale(1.1); /* Logo slightly enlarges on hover */
+  }
+  
+  /* Header Content */
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    align-items: center;
+    margin: 0 auto;
+    position: relative;
+  }
+  
+  /* Logo Styling */
+  .logo h1 {
+    font-family: 'NewYork', serif;
+    font-size: 36px;
+    text-align: center;
+    margin: 0;
+    color: rgb(0, 0, 0);
+  }
+  
+  .green {
+    color: green;
+  }
+  
+  .harvest {
+    color: black;
+  }
+  
+  
+  
+  /* Left and Right Menu Links */
+  .left-content, .right-content {
+    display: flex;
+    gap: 40px;
+  }
+  
+  .left-content .link, .right-content .link {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-size: 18px;
+    transition: color 0.3s ease;
+  }
+  
+  .left-content .link:hover, .right-content .link:hover {
+    color: #007b3e;
+  }
+  
+  /* Logo Image Styling */
+  .logo-link {
+    display: inline-block;
+    margin-right: 15px; /* Space between the image and Home button */
+  }
+  
+  .logo-img {
+    width: 50px; /* Increase the size of the image */
+    height: auto;
+    transition: transform 0.3s ease; /* Smooth scaling animation */
+  }
+  
+  /* Hover Effect for the Logo Image */
+  .logo-img:hover {
+    transform: scale(1.2); /* Increase size more when hovered */
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: 100px; /* Add some padding if needed */
+  }
+  
+  .title {
+    font-size: 50px;
+    font-weight: bold;
+  }
+  
+  .description {
+    font-size: 25px; /* Adjust font size if needed */
+    margin-bottom: 40px; /* Space below description */
+
+  }
+  
+  .text-overlay1 {
+    line-height: 2;
+    position: absolute;
+    top: 420px; /* Adjust position to place the text over the images */
+    right: 1000px; /* Center the text horizontally */
+    transform: translateX(-50%); /* Center the text horizontally */
+    color: white; /* Default text color */
+    z-index: 1; /* Ensure text is above images */
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for readability */
+    border-radius: 10px;
+    max-width: 500px; /* Limit the width of the text block */
+  }
+
+  .text-overlay2 {
+    line-height: 2;
+    position: absolute;
+    top: 420px; /* Adjust position to place the text over the images */
+    left: 940px; /* Center the text horizontally */
+    transform: translateX(-50%); /* Center the text horizontally */
+    color: white; /* Default text color */
+    z-index: 1; /* Ensure text is above images */
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for readability */
+    border-radius: 10px;
+    max-width: 500px; /* Limit the width of the text block */
+  }
+
+  .text-overlay3 {
+    line-height: 2;
+    position: absolute;
+    top: 420px; /* Adjust position to place the text over the images */
+    left: 1470px; /* Center the text horizontally */
+    transform: translateX(-50%); /* Center the text horizontally */
+    color: white; /* Default text color */
+    z-index: 1; /* Ensure text is above images */
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for readability */
+    border-radius: 10px;
+    max-width: 500px; /* Limit the width of the text block */
+  }
+
+  .overlay-image {
+    width: 80%; /* Adjust this percentage to control the image size */
+    max-width: 200px; /* Limits the image width */
+    height: auto; /* Maintains the aspect ratio */
+    border-radius: 8px; /* Adds rounded corners if desired */
+    margin-bottom: 15px; /* Space between the image and heading */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow for effect */
+  }
+  
+  /* Optional: Hover effect for clickable image */
+  .image-link:hover .overlay-image {
+    transform: scale(1.05); /* Slightly enlarge image on hover */
+    transition: transform 0.3s ease;
+  }
+  
+  /* Link Styling with Hover Transition */
+.left-content .link, .right-content .link {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-size: 18px;
+    transition: color 0.3s ease, transform 0.3s ease; /* Added transition for smooth effect */
+  }
+  
+  .left-content .link:hover, .right-content .link:hover {
+    color: #007b3e;
+    transform: scale(1.1); /* Adds a slight zoom effect when hovered */
+  }
+  
+  
+  
+  
