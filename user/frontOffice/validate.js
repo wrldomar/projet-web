@@ -71,7 +71,9 @@ function validate()
         alert("Please enter a valid email address!!")
         return false;
     }
-
+    
+    // validate phone
+    
     if(isNaN(phone)){
         alert("Please enter a valid phone number!!")
         return false;
