@@ -1,7 +1,7 @@
 
 <?php
-require_once 'config.php';
-require_once 'model/user.php';
+include '../model/user.php';
+include '../config.php';
 
 class UserController {
 
@@ -65,9 +65,6 @@ class UserController {
             // Ajouter l'utilisateur dans la base de données
             $this->createUser($id, $nom, $prenom, $dateNaissance, $type, $email, $telephone);
     
-            // Rediriger vers le formulaire avec un message de succès
-            header('Location: ../view/userForm.php?success_message=User successfully registered!');
-            exit();
         }
     }
 }

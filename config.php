@@ -11,7 +11,7 @@ class Config {
             $dsn = "mysql:host=" . self::$host . ";dbname=" . self::$dbname . ";charset=utf8"; 
             $conn = new PDO($dsn, self::$user, self::$password);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            echo "Database connection successful!<br>";
+            //echo "Database connection successful!<br>";
             return $conn;
         } catch (PDOException $e) {
             echo "Connection failed: " . $e->getMessage();

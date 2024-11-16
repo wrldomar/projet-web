@@ -6,11 +6,30 @@
     <title>User-form</title>
     <link rel="stylesheet" href="user.css">
     <script src="validate.js"></script>
+    <style>
+        .success-message {
+            color: green;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body>
+<?php
+    //le fichier UserController.php pour pouvoir utiliser la classe
+    include '../controller/UserController.php';
+
+    $userController = new UserController();
+
+    // la méthode handleRequest pour gérer le formulaire si nécessaire
+    $userController->handleRequest();
+
+    ?>
+    
     <div class="form-container">
         <h2>Registration Form</h2>
-        <form action="../controller/UserController.php" method="POST" >
+        <form action="" method="POST" onsubmit="return validate()">
             <label for="id">ID</label>
             <input type="text" id="id" name="id">
 
@@ -41,10 +60,13 @@
 
             <button type="submit" name="register">Register</button>
         </form>
+        <?php 
+        // Afficher un message de succès si la requête est de type POST
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
+            echo "<div class='success-message'>User added succesfully!</div>";
+        }
+        ?>
     </div>
-    <?php
-    if (isset($_GET['success_message'])) {
-    echo '<p>' . htmlspecialchars($_GET['success_message']) . '</p>';}
-    ?>
+    
 </body>
 </html>
