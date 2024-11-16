@@ -1,4 +1,3 @@
-
 <?php
 class Config {
     private static $host = '127.0.0.1'; 
@@ -22,5 +21,3 @@ class Config {
 
 Config::getConnection();
 ?>
-
-
