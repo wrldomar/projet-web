@@ -22,7 +22,7 @@ class UserController {
             $sql = "SELECT * FROM users";
             $stmt = $conn->prepare($sql);
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_CLASS, 'user');
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         return [];
     }
