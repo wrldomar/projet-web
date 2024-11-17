@@ -1,6 +1,7 @@
-<?php
 
-class user{
+<?php
+//namespace Model;
+class User{
 
     private $id;
     private $nom;
@@ -10,7 +11,8 @@ class user{
     private $email;
     private $telephone;
     
-    public function __construct($id,$nom,$prenom,$dateNaissance,$type,$email,$telephone)
+    //public function __construct($id , $nom , $prenom , $dateNaissance , $type , $email , $telephone)
+    public function __construct($id = null, $nom = null, $prenom = null, $dateNaissance = null, $type = null, $email = null, $telephone = null)
     {
         $this->id = $id;
         $this->nom = $nom;
