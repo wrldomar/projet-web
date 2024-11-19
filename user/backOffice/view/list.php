@@ -1,6 +1,4 @@
 <?php
-// use Model\User;
-// include "../model/user.php";
 include "../controller/UserController.php";
 
 $userController = new UserController();
@@ -8,6 +6,7 @@ $userController = new UserController();
 // Récupérer la liste de tous les utilisateurs
 $list = $userController->getAllUsers();
 
+// Styles CSS
 echo "
 <style>
     body {
@@ -47,10 +46,36 @@ echo "
     td {
         color: #555;
     }
+    /* Styles pour les boutons */
+    button {
+        border: none;
+        padding: 8px 16px;
+        font-size: 14px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    button:hover {
+        transform: scale(1.05);
+    }
+    button[type='submit']:not(.delete) {
+        background-color: #007BFF;
+        color: white;
+    }
+    button[type='submit']:not(.delete):hover {
+        background-color: #0056b3;
+    }
+    button.delete {
+        background-color: #FF4D4D;
+        color: white;
+    }
+    button.delete:hover {
+        background-color: #cc0000;
+    }
 </style>
 ";
 
-echo "<h2>Client Users</h2>";
+echo "<h2>Clients</h2>";
 echo "<table>
         <tr>
             <th>ID</th>
@@ -60,24 +85,37 @@ echo "<table>
             <th>Type</th>
             <th>Email</th>
             <th>Phone</th>
+            <th>Action</th>
         </tr>";
 
 foreach ($list as $row) {
-    if ($row['type'] === 'client') { 
+    if ($row['type'] === 'client') {
         echo "<tr>
                 <td>{$row['id']}</td>
                 <td>{$row['nom']}</td>
                 <td>{$row['prenom']}</td>
-                <td>{$row['dateNaissance']}</td> 
-                <td>{$row['type']}</td> 
+                <td>{$row['dateNaissance']}</td>
+                <td>{$row['type']}</td>
                 <td>{$row['email']}</td>
                 <td>{$row['telephone']}</td>
+                <td>
+                    <form method='post' action='edit.php' style='display:inline;'>
+                        <input type='hidden'  name='id' value='{$row['id']}'>
+                        <button type='submit'>Edit</button>
+                    </form>
+                    <form method='post' action='delete.php' style='display:inline;'>
+                        <input type='hidden' name='id' value='{$row['id']}'>
+                        <button type='submit' class='delete' onclick='return confirm(\"Are you sure you want to delete this user?\")'>Delete</button>
+                    </form>
+                </td>
               </tr>";
     }
 }
 echo "</table>";
 
-echo "<h2>Farmer Users</h2>";
+echo"<br></br>";
+
+echo "<h2>Farmers</h2>";
 echo "<table>
         <tr>
             <th>ID</th>
@@ -87,18 +125,29 @@ echo "<table>
             <th>Type</th>
             <th>Email</th>
             <th>Phone</th>
+            <th>Action</th>
         </tr>";
 
 foreach ($list as $row) {
-    if ($row['type'] === 'fermier') { 
+    if ($row['type'] === 'fermier') {
         echo "<tr>
                 <td>{$row['id']}</td>
                 <td>{$row['nom']}</td>
                 <td>{$row['prenom']}</td>
-                <td>{$row['dateNaissance']}</td> 
-                <td>{$row['type']}</td> 
+                <td>{$row['dateNaissance']}</td>
+                <td>{$row['type']}</td>
                 <td>{$row['email']}</td>
                 <td>{$row['telephone']}</td>
+               <td>
+                    <form method='post' action='edit.php' style='display:inline;'>
+                        <input type='hidden'  name='id' value='{$row['id']}'>
+                        <button type='submit'>Edit</button>
+                    </form>
+                    <form method='post' action='delete.php' style='display:inline;'>
+                        <input type='hidden' name='id' value='{$row['id']}'>
+                        <button type='submit' class='delete' onclick='return confirm(\"Are you sure you want to delete this user?\")'>Delete</button>
+                    </form>
+                </td>
               </tr>";
     }
 }
