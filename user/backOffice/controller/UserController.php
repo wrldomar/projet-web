@@ -1,3 +1,4 @@
+
 <?php
 include '../model/user.php';
 include '../config.php';
@@ -83,5 +84,23 @@ class UserController {
             }
         }
     }
+
+    // Fonction pour récupérer un utilisateur par son ID
+public function getUserById($id) {
+    try {
+        $conn = Config::getConnection();
+        if ($conn) {
+            $sql = "SELECT * FROM users WHERE id = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([$id]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+    } catch (PDOException $e) {
+        die("Erreur lors de la récupération de l'utilisateur : " . $e->getMessage());
+    }
+    return null;
+}
+
+
 }
 ?>
