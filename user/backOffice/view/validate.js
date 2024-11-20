@@ -43,15 +43,20 @@ function validate()
         return false;
     }
 
-     // Validate Date of Birth
-     /*if (date) {
-        let dob = new Date(date)
-        if (isNaN(dob.getTime())) {
+    //Validate Date of Birth
+    if (date) {
+        //let dob = new Date(date);
+        //if (isNaN(dob.getTime())) {
+            //alert("Please enter a valid date!!");
+            //return false;
+        //}
+        let maxDate = new Date('2024-12-31');
+        if (dob > maxDate) {
             alert("Please enter a valid date!!");
             return false;
         }
+    }
     
-    }*/
 
     // Validate Type
 
