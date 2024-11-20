@@ -1,44 +1,61 @@
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-  background-color: #e0f7fa;
-  font-family: Arial, sans-serif;
-}
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #e0f7fa;
+    font-family: Arial, sans-serif;
+  }
 
-/* Login card */
-.login-container {
-  width: 100%;
-  max-width: 400px;
-  padding: 30px;
-  background-color: #ffffff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-  text-align: center;
-}
+  /* Login card */
+  .login-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    text-align: center;
+  }
 
-/* Title */
-.login-container h2 {
-  margin-bottom: 20px;
-  color: #333;
-}
+  /* Title */
+  .login-container h2 {
+    margin-bottom: 20px;
+    color: #333;
+  }
 
-/* Input fields style */
-.login-container input[type="text"],
-.login-container input[type="password"] {
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-sizing: border-box;
-  font-size: 16px;
-}
+  /* Input fields style */
+  .login-container input[type="text"],
+  .login-container input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
 
-/* Submit button style */
-.login-container button {
+  /* Submit button style */
+  .login-container button {
+    width: 100%;
+    padding: 14px;
+    background-color: #00796b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .login-container button:hover {
+    background-color: #004d40;
+  }
+
+  /* Additional style if needed for Logout button */
+.logout-button {
   width: 100%;
   padding: 14px;
   background-color: #00796b;
@@ -48,26 +65,9 @@ body {
   font-size: 18px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-}
-
-.login-container button:hover {
+  margin-top: 10px; /* Optional spacing */
+  }
+  
+  .logout-button:hover {
   background-color: #004d40;
-}
-
-/* Additional style if needed for Logout button */
-.logout-button {
-width: 100%;
-padding: 14px;
-background-color: #00796b;
-color: white;
-border: none;
-border-radius: 5px;
-font-size: 18px;
-cursor: pointer;
-transition: background-color 0.3s ease;
-margin-top: 10px; /* Optional spacing */
-}
-
-.logout-button:hover {
-background-color: #004d40;
-}
+  }
