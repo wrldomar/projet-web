@@ -86,7 +86,7 @@ class UserController {
     }
 
     // Fonction pour récupérer un utilisateur par son ID
-public function getUserById($id) {
+public function getUserById($id): mixed {
     try {
         $conn = Config::getConnection();
         if ($conn) {
@@ -101,6 +101,23 @@ public function getUserById($id) {
     return null;
 }
 
+// Fonction pour récupérer un utilisateur par son nom et son prenom
+public function getUserByName($prenom, $nom) {
+    try {
+        $conn = Config::getConnection();
+        if ($conn) {
+            $sql = "SELECT * FROM users WHERE prenom = ? AND nom = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([$prenom, $nom]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+    } catch (PDOException $e) {
+        die("Erreur lors de la récupération de l'utilisateur : " . $e->getMessage());
+    }
+    return null;
+}
+
 
 }
+
 ?>
