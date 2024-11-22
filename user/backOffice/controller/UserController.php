@@ -102,13 +102,13 @@ public function getUserById($id): mixed {
 }
 
 // Fonction pour récupérer un utilisateur par son nom et son prenom
-public function getUserByName($prenom, $nom) {
+public function getUserByName($nom,$prenom) {
     try {
         $conn = Config::getConnection();
         if ($conn) {
-            $sql = "SELECT * FROM users WHERE prenom = ? AND nom = ?";
+            $sql = "SELECT * FROM users WHERE nom = ? AND prenom = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->execute([$prenom, $nom]);
+            $stmt->execute([$nom, $prenom]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
     } catch (PDOException $e) {
