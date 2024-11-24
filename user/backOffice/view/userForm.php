@@ -17,15 +17,14 @@
 </head>
 <body>
 <?php
-    //le fichier UserController.php pour pouvoir utiliser la classe
+    // le fichier UserController.php pour pouvoir utiliser la classe
     include '../controller/UserController.php';
 
     $userController = new UserController();
 
     // la méthode handleRequest pour gérer le formulaire si nécessaire
     $userController->handleRequest();
-
-    ?>
+?>
     
     <div class="form-container">
         <h2>Registration Form</h2>
@@ -45,7 +44,7 @@
             <div class="radio-group">
                 <label>Type</label>
                 <label>
-                    <input type="radio" id="r1" name="type" value="fermier"> Fermier
+                    <input type="radio" id="r1" name="type" value="farmer"> Farmer
                 </label>
                 <label>
                     <input type="radio" id="r2" name="type" value="client"> Client
@@ -63,10 +62,10 @@
         <?php 
         // Afficher un message de succès si la requête est de type POST
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
-            echo "<div class='success-message'>User added succesfully!</div>";
+            echo "<div class='success-message'>User added successfully!</div>";
         }
         ?>
     </div>
-    
 </body>
 </html>
+
