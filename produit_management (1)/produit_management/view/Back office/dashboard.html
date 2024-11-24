@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <div class="sidebar">
+    <div class="logo-details">
+      <i class='bx bxl-google'></i>
+      <a href="../../../../home/view/front office/home.html" class="logo-link">
+      <span class="logo_name">GreenHarvest</span>
+      </a>
+    </div>
+    <ul class="nav-links">
+      <li>
+        <a href="#" class="active">
+          <i class='bx bx-grid-alt' ></i>
+          <span class="links_name">Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="nav-link" id="product-link">
+          <i class='bx bx-box' ></i>
+          <span class="links_name">Product</span>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bx-list-ul' ></i>
+          <span class="links_name">Order list</span>
+        </a>
+      </li>
+      <!-- More links here -->
+    </ul>
+  </div>
+  <section class="home-section">
+    <nav>
+      <div class="sidebar-button">
+        <i class='bx bx-menu sidebarBtn'></i>
+        <span class="dashboard">Dashboard</span>
+      </div>
+      <div class="search-box">
+        <input type="text" placeholder="Search...">
+        <i class='bx bx-search' ></i>
+      </div>
+    </nav>
+
+    <div class="home-content">
+      <div id="content-container">
+        <!-- Dynamic content will be loaded here -->
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const navLinks = document.querySelectorAll(".nav-links a");
+      const contentContainer = document.getElementById("content-container");
+
+      function loadContent(url) {
+        fetch(url)
+          .then(response => response.text())
+          .then(data => {
+            contentContainer.innerHTML = data;  // Inject content into the container
+          })
+          .catch(error => {
+            console.error("Error loading content:", error);
+          });
+      }
+
+      navLinks.forEach(link => {
+        link.addEventListener("click", function(event) {
+          // Remove active class from all links
+          navLinks.forEach(link => link.classList.remove("active"));
+          
+          // Add active class to clicked link
+          this.classList.add("active");
+
+          // Load product list when clicking on the "Product" link
+          if (this.id === "product-link") {
+            event.preventDefault();  // Prevent default link behavior
+            loadContent("listproduct.php");  // Dynamically load the listproduct.php page
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

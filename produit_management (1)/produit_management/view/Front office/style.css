@@ -1,0 +1,287 @@
+
+/* Header Section */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px; /* Adjust padding for spacing */
+    background-color: rgba(255, 255, 255, 0.733);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    height: 70px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-bottom: 2px solid #000;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  /* Hidden header when scrolling */
+  .header-hidden {
+    transform: translateY(-100%);
+  }
+  
+  /* Logo and Header Content Styling */
+  .logo {
+    display: flex;
+    align-items: center;
+    font-family: 'NewYork', serif;
+    font-size: 36px;
+    color: rgb(0, 0, 0);
+    position: absolute; /* Center the logo */
+    left: 50%;
+    transform: translateX(-50%); /* Center the logo horizontally */
+  }
+  
+  /* Logo Styling */
+  .logo h1 {
+    font-family: 'NewYork', serif;
+    font-size: 40px;
+    text-align: center;
+    margin: 0;
+    color: rgb(0, 0, 0);
+  }
+  
+  .green {
+    color: green;
+  }
+  
+  .harvest {
+    color: black;
+  }
+  
+  .nav-logo {
+    width: 30px;
+    height: auto;
+    margin-left: 10px;
+    transition: transform 0.3s ease;
+  }
+  
+  .nav-logo:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Header Content Layout */
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: relative;
+  }
+  
+  /* Left and Right Menu Links */
+  .left-content, .right-content {
+    display: flex;
+    gap: 40px;
+    position: absolute;
+  }
+  
+  .left-content {
+    left: 20px; /* Position the left content at the left */
+  }
+  
+  .right-content {
+    right: 20px; /* Position the right content at the right */
+  }
+  
+  .left-content .link, .right-content .link {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-size: 18px;
+    transition: color 0.3s ease;
+  }
+  
+  .left-content .link:hover, .right-content .link:hover {
+    color: #007b3e;
+  }
+  
+  /* Logo Image Styling */
+  .logo-link {
+    display: inline-block;
+    margin-right: 15px;
+  }
+  
+  .logo-img {
+    width: 50px;
+    height: auto;
+    transition: transform 0.3s ease;
+  }
+  
+  .logo-img:hover {
+    transform: scale(1.2);
+  }
+
+
+
+
+
+
+
+/* General reset */
+* {
+    margin: 10;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;  /* Light background */
+    color: #333;
+    padding: 20px;
+}
+
+
+/* Form container */
+form {
+    background-color: #fff;  /* White background for form */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 20px auto;
+    font-size: 16px;
+}
+
+/* Form Heading */
+form h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #2a7f62;  /* Green color for the heading */
+    text-align: center;
+}
+
+/* Input Fields and Labels */
+.form-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.form-group label {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: #4CAF50; /* Green label */
+}
+
+.form-group i {
+    margin-right: 10px;  /* Space between icon and label */
+    color: #4CAF50;  /* Icon color */
+}
+
+/* Input field styling */
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    outline: none;
+    background-color: #f7f7f7;  /* Light grey background */
+}
+
+.form-group input:focus, .form-group select:focus {
+    border-color: #4CAF50;  /* Green border on focus */
+}
+
+/* Button Styling */
+.submit-btn {
+    background-color: #4CAF50;  /* Green button */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #45a049;  /* Darker green on hover */
+}
+
+/* Success/Failure Message */
+.alert {
+    margin-top: 20px;  /* Add space between the form and the message */
+    padding: 10px;
+    font-size: 16px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 5px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.success {
+    background-color: #4CAF50;  /* Green background */
+    color: white;  /* White text */
+}
+
+.failure {
+    background-color: #f44336;  /* Red background */
+    color: white;  /* White text */
+}
+
+
+
+/* Dropdown Container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    transition: transform 0.3s ease;
+  }
+  
+  /* Group 8 and Events Image Hover */
+  .dropdown:hover .logo-img {
+    transform: scale(1.1); /* Slightly enlarge the image */
+  }
+  
+  /* Dropdown Menu */
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%; /* Position below the Events image or link */
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    min-width: 150px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 10;
+  }
+  
+  /* Hover to Show Dropdown */
+  .dropdown:hover .dropdown-menu {
+    display: block;
+    opacity: 1;
+    transform: translateY(0); /* Slide up animation */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+  }
+  
+  /* Dropdown Links */
+  .dropdown-menu .dropdown-link {
+    color: #333;
+    padding: 12px 16px;
+    display: block;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  /* Hover Effect for Dropdown Links */
+  .dropdown-menu .dropdown-link:hover {
+    background-color: #19aa14;
+    color: white;
+    transform: scale(1.05); /* Slightly enlarge the link on hover */
+  }
+
+
+

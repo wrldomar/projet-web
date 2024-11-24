@@ -1,0 +1,386 @@
+body {
+    padding-top: 100px; /* Add more space for the header and content */
+}
+
+
+/* Initial Header Styling */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px; /* Adjust padding for spacing */
+    background-color: rgba(255, 255, 255, 0.8);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    height: 70px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-bottom: 2px solid #000;
+    transition: transform 0.3s ease-in-out; /* Transition effect for sliding */
+}
+
+/* Hidden header class */
+header.hidden {
+    transform: translateY(-100%); /* Move the header off-screen when scrolled down */
+}
+
+/* Optional: Styles for links or additional header elements */
+header .logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* More styles here */
+
+header .link {
+    color: #333;
+    text-decoration: none;
+    padding: 5px 10px;
+    transition: color 0.3s ease;
+}
+
+header .link:hover {
+    color: #006400; /* Green color on hover */
+}
+
+
+
+  
+  /* Logo and Header Content Styling */
+  .logo {
+    display: flex;
+    align-items: center;
+    font-family: 'NewYork', serif;
+    font-size: 36px;
+    color: rgb(0, 0, 0);
+    position: absolute; /* Center the logo */
+    left: 50%;
+    transform: translateX(-50%); /* Center the logo horizontally */
+  }
+  
+  /* Logo Styling */
+  .logo h1 {
+    font-family: 'NewYork', serif;
+    font-size: 40px;
+    text-align: center;
+    margin: 0;
+    color: rgb(0, 0, 0);
+  }
+  
+  .green {
+    color: green;
+  }
+  
+  .harvest {
+    color: black;
+  }
+  
+  .nav-logo {
+    width: 30px;
+    height: auto;
+    margin-left: 10px;
+    transition: transform 0.3s ease;
+  }
+  
+  .nav-logo:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Header Content Layout */
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: relative;
+  }
+  
+  /* Left and Right Menu Links */
+  .left-content, .right-content {
+    display: flex;
+    gap: 40px;
+    position: absolute;
+  }
+  
+  .left-content {
+    left: 20px; /* Position the left content at the left */
+  }
+  
+  .right-content {
+    right: 20px; /* Position the right content at the right */
+  }
+  
+  .left-content .link, .right-content .link {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-size: 18px;
+    transition: color 0.3s ease;
+  }
+  
+  .left-content .link:hover, .right-content .link:hover {
+    color: #007b3e;
+  }
+  
+  /* Logo Image Styling */
+  .logo-link {
+    display: inline-block;
+    margin-right: 15px;
+  }
+  
+  .logo-img {
+    width: 50px;
+    height: auto;
+    transition: transform 0.3s ease;
+  }
+  
+  .logo-img:hover {
+    transform: scale(1.2);
+  }
+
+
+/* Dropdown Container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    transition: transform 0.3s ease;
+  }
+  
+  /* Group 8 and Events Image Hover */
+  .dropdown:hover .logo-img {
+    transform: scale(1.1); /* Slightly enlarge the image */
+  }
+  
+  /* Dropdown Menu */
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%; /* Position below the Events image or link */
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    min-width: 150px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 10;
+  }
+  
+  /* Hover to Show Dropdown */
+  .dropdown:hover .dropdown-menu {
+    display: block;
+    opacity: 1;
+    transform: translateY(0); /* Slide up animation */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+  }
+  
+  /* Dropdown Links */
+  .dropdown-menu .dropdown-link {
+    color: #333;
+    padding: 12px 16px;
+    display: block;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  /* Hover Effect for Dropdown Links */
+  .dropdown-menu .dropdown-link:hover {
+    background-color: #19aa14;
+    color: white;
+    transform: scale(1.05); /* Slightly enlarge the link on hover */
+  }
+
+
+
+
+/* Refined Add to Cart Button */
+.btn-add-to-cart {
+    background-color: #4caf50;  /* Clean green background */
+    color: white;  /* White text for contrast */
+    padding: 12px 20px;  /* Balanced padding */
+    border: none;  /* Remove border */
+    border-radius: 30px;  /* Rounded corners for a modern, soft look */
+    font-size: 1rem;  /* Standard font size */
+    font-weight: 600;  /* Bold text */
+    cursor: pointer;  /* Pointer cursor on hover */
+    transition: background-color 0.3s ease, transform 0.2s ease;  /* Smooth color transition */
+    text-transform: uppercase;  /* Uppercase text for emphasis */
+    display: flex;  /* Use flex for aligning content */
+    align-items: center;  /* Vertically center the text */
+    justify-content: center;  /* Horizontally center the text */
+    text-decoration: none;  /* Remove underline from the link */
+}
+
+/* Hover State */
+.btn-add-to-cart:hover {
+    background-color: #45a049;  /* Darker green on hover */
+    transform: scale(1.05);  /* Slightly enlarge the button on hover */
+}
+
+/* Active State */
+.btn-add-to-cart:active {
+    background-color: #388e3c;  /* Even darker green on click */
+    transform: scale(0.98);  /* Slightly shrink the button when clicked */
+}
+
+/* Optional: Add a subtle cart icon before the text */
+.btn-add-to-cart::before {
+    content: url('cart-icon.svg');  /* Add your cart icon */
+    margin-right: 8px;  /* Space between icon and text */
+    width: 18px;  /* Icon size */
+    height: auto;  /* Maintain aspect ratio */
+}
+
+
+
+
+
+
+
+
+  
+/* Product Container */
+.product-list {
+    margin-top: 150px;  /* Adds more space to the top of the product list */
+    padding: 20px;
+}
+
+
+.product-list h1 {
+    font-size: 2.5rem;
+    color: #1a3a2b;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Back Link */
+.back-link {
+    font-size: 1.2rem;
+    color: #1a3a2b;
+    text-decoration: none;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.back-link:hover {
+    color: #4caf50;
+    text-decoration: underline;
+}
+
+/* Product Grid Layout */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+/* Product Card */
+.product-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 20px;
+    transition: all 0.3s ease;
+    text-align: center;
+    cursor: pointer;
+    height: 100%;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* Product Image */
+.product-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+/* Product Details */
+.product-card h2 {
+    font-size: 1.6rem;
+    color: #2d6a4f;
+    margin-bottom: 10px;
+}
+
+.product-card .price {
+    font-size: 1.2rem;
+    color: #4caf50;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.product-card .quantity {
+    font-size: 1rem;
+    color: #999;
+    margin-bottom: 15px;
+}
+
+
+
+/* Buy Button */
+.buy-btn {
+    background-color: #4caf50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.buy-btn:hover {
+    background-color: #45a049;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 150px; /* Increased space above the table */
+}
+
+
+table th,
+table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #2d6a4f;
+    color: white;
+    text-transform: uppercase;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+table td {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+table td img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-top: 20px; /* Increased space above the image */
+    margin-bottom: 10px; /* Optional: Adjust space below the image */
+}
+
+
