@@ -129,7 +129,7 @@ echo "<table>
         </tr>";
 
 foreach ($list as $row) {
-    if ($row['type'] === 'fermier') {
+    if ($row['type'] === 'farmer') {
         echo "<tr>
                 <td>{$row['id']}</td>
                 <td>{$row['nom']}</td>
