@@ -5,17 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>User Sigin</title>
   <link rel="stylesheet" href="login.css">
+  <script src="valider.js"></script>
 </head>
 <body>
   <div class="login-container">
     <h2>Sign In</h2>
-    <form action="loginHandler.php" method="post">
-      <input type="text" placeholder="First Name" name="firstName" required>
-      <input type="text" placeholder="Last Name" name="lastName" required>
+    <form action="loginHandler.php" method="post" onsubmit="return valider()">
+      <input type="text" placeholder="First Name" name="firstName" id="n1">
+      <input type="text" placeholder="Last Name" name="lastName" id="n2">
       <br>
       <br>
       <button type="submit">Sign In</button>
-      <button type="button" class="logout-button">Sign Out</button>
+      <a href="home.html">
+        <button type="button" class="logout-button">Sign Out</button>
+      </a>
     </form>
   </div>
 </body>
