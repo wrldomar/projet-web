@@ -1,8 +1,11 @@
 
 <?php
-include '../model/user.php';
-include '../config.php';
 
+//include '../model/user.php';
+//include '../config.php';
+
+include 'C:/xampV.2/htdocs/projet-web/BackOffice/model/user.php';
+include 'C:/xampV.2/htdocs/projet-web/BackOffice/config.php';
 class UserController {
 
     // Fonction pour créer un nouvel utilisateur dans la base de données
