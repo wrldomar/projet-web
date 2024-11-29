@@ -109,7 +109,7 @@ public function getUserByName($nom,$prenom) {
     try {
         $conn = Config::getConnection();
         if ($conn) {
-            $sql = "SELECT * FROM users WHERE nom = ? AND prenom = ?";
+            $sql = "SELECT nom , prenom FROM users WHERE nom = ? AND prenom = ?";
             $stmt = $conn->prepare($sql);
             $stmt->execute([$nom, $prenom]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
