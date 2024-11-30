@@ -28,29 +28,32 @@
         <button type="button" class="logout-button">Sign Out</button>
       </a>
     </form>
+<?php
+include $_SERVER['DOCUMENT_ROOT'] . '/projet-web/BackOffice/controller/UserController.php';
 
-    <?php
-    // Traitement PHP du formulaire après soumission
-    include $_SERVER['DOCUMENT_ROOT'] . '/projet-web/BackOffice/controller/UserController.php';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $nom = isset($_POST['firstName']) ? trim($_POST['firstName']) : '';
+    $prenom = isset($_POST['lastName']) ? trim($_POST['lastName']) : '';
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $nom = isset($_POST['firstName']) ? trim($_POST['firstName']) : '';
-        $prenom = isset($_POST['lastName']) ? trim($_POST['lastName']) : '';
+    $userController = new UserController();
+    $user = $userController->getUserByName($nom, $prenom);
 
-        $userController = new UserController();
-        $user = $userController->getUserByName($nom, $prenom);
-
-        if ($user && isset($user['nom']) && isset($user['prenom'])) {
-         
-            echo "<div class='success-message'>Welcome, " . htmlspecialchars($user['nom']) . " " . htmlspecialchars($user['prenom']) . "!</div>";
-        } 
-        else {
-
-            header("Location: /projet-web/BackOffice/view/userForm.php");
-            exit();
-        }
+    if ($user && isset($user['nom']) && isset($user['prenom'])) {
+      
+        echo "<div class='success-message'>Welcome, " . htmlspecialchars($user['nom']) . " " . htmlspecialchars($user['prenom']) . "!</div>";
+        
+        echo "<script>
+                setTimeout(function() {
+                    window.location.href = 'home.html';
+                }, 1000); 
+              </script>";
+    } 
+    else {
+        header("Location: /projet-web/BackOffice/view/userForm.php");
+        exit();
     }
-    ?>
-  </div>
+}
+?>
+</div>
 </body>
 </html>
