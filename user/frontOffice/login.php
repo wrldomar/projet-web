@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-<div class="footer">*
+<div class="footer">
   <p>&copy; 2024 All Rights Reserved by GreenHarvest.</p>
 </div>
 </div>
