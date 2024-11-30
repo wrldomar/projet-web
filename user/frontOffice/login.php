@@ -14,6 +14,12 @@
             font-size: 16px;
             font-weight: bold;
         }
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 14px;
+            color: #555;
+        }
     </style>
 </head>
 <body>
@@ -39,13 +45,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = $userController->getUserByName($nom, $prenom);
 
     if ($user && isset($user['nom']) && isset($user['prenom'])) {
-      
+
         echo "<div class='success-message'>Welcome, " . htmlspecialchars($user['nom']) . " " . htmlspecialchars($user['prenom']) . "!</div>";
         
         echo "<script>
                 setTimeout(function() {
                     window.location.href = 'home.html';
-                }, 1000); 
+                }, 2000); 
               </script>";
     } 
     else {
@@ -54,6 +60,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+<div class="footer">*
+  <p>&copy; 2024 All Rights Reserved by GreenHarvest.</p>
+</div>
 </div>
 </body>
 </html>
