@@ -31,19 +31,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Create Product object
-    $newProduct = new Product(null, $id_farmer, $id_categorie, $name_product, $product_price, $quantite);
-    $newProduct->setProductImage($product_image);
+    // CAPTCHA verification
+    $captchaSecret = '6LfHbY8qAAAAAA8OOa9_QHNHN0ValacPFE_Wiixo'; // Replace with your actual secret key
+    $captchaResponse = $_POST['g-recaptcha-response'];
 
-    // Add Product to Database
-    $productController = new ProductController();
-    if ($productController->addProduct($newProduct)) {
-        $message = "Product added successfully!";
+    // Verify CAPTCHA with Google
+    $verifyUrl = "https://www.google.com/recaptcha/api/siteverify?secret=$captchaSecret&response=$captchaResponse";
+    $verifyResponse = file_get_contents($verifyUrl);
+    $responseKeys = json_decode($verifyResponse, true);
+
+    // If CAPTCHA is not successful
+    if ($responseKeys['success'] == false) {
+        $message = "Captcha verification failed. Please try again.";
     } else {
-        $message = "Failed to add product.";
+        // Create Product object
+        $newProduct = new Product(null, $id_farmer, $id_categorie, $name_product, $product_price, $quantite);
+        $newProduct->setProductImage($product_image);
+
+        // Add Product to Database
+        $productController = new ProductController();
+        if ($productController->addProduct($newProduct)) {
+            $message = "Product added successfully!";
+        } else {
+            $message = "Failed to add product.";
+        }
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -56,11 +69,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="validation.js"></script>
     <!-- Add Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Add Google reCAPTCHA API -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
-
-
-
 <body>
+    <!-- Header -->
     <header id="header">
         <div class="header-content">
             <div class="left-content">
@@ -103,47 +116,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </header>
 
-
-
     <!-- Product Form -->
     <form action="addingproduct.php" method="POST" enctype="multipart/form-data">
-    <h2>Add New Product</h2>
-    <div class="form-group">
-        <label for="id_farmer"><i class="fas fa-user"></i> Farmer ID:</label>
-        <input type="number" id="id_farmer" name="id_farmer" >
-    </div>
-    <div class="form-group">
-        <label for="id_categorie"><i class="fas fa-list-alt"></i> Category:</label>
-        <select id="id_categorie" name="id_categorie" >
-            <option value="">Select a category</option>
-            <?php
-            foreach ($categoriesList as $category) {
-                echo "<option value='" . htmlspecialchars($category['id_categorie']) . "'>" . htmlspecialchars($category['categorie_name']) . "</option>";
-            }
-            ?>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="name_product"><i class="fas fa-cogs"></i> Product Name:</label>
-        <input type="text" id="name_product" name="name_product" >
-    </div>
-    <div class="form-group">
-        <label for="product_price"><i class="fas fa-dollar-sign"></i> Product Price:</label>
-        <input type="number" step="0.01" id="product_price" name="product_price" >
-    </div>
-    <div class="form-group">
-        <label for="quantite"><i class="fas fa-box"></i> Quantity:</label>
-        <input type="number" id="quantite" name="quantite" >
-    </div>
-    <div class="form-group">
-        <label for="product_image"><i class="fas fa-image"></i> Product Image:</label>
-        <input type="file" id="product_image" name="product_image" accept="image/*" >
-    </div>
-    <button type="submit" class="submit-btn">Add Product</button>
-</form>
+        <h2>Add New Product</h2>
+        <div class="form-group">
+            <label for="id_farmer"><i class="fas fa-user"></i> Farmer ID:</label>
+            <input type="number" id="id_farmer" name="id_farmer" >
+        </div>
+        <div class="form-group">
+            <label for="id_categorie"><i class="fas fa-list-alt"></i> Category:</label>
+            <select id="id_categorie" name="id_categorie" >
+                <option value="">Select a category</option>
+                <?php
+                foreach ($categoriesList as $category) {
+                    echo "<option value='" . htmlspecialchars($category['id_categorie']) . "'>" . htmlspecialchars($category['categorie_name']) . "</option>";
+                }
+                ?>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="name_product"><i class="fas fa-cogs"></i> Product Name:</label>
+            <input type="text" id="name_product" name="name_product" >
+        </div>
+        <div class="form-group">
+            <label for="product_price"><i class="fas fa-dollar-sign"></i> Product Price:</label>
+            <input type="number" step="0.01" id="product_price" name="product_price" >
+        </div>
+        <div class="form-group">
+            <label for="quantite"><i class="fas fa-box"></i> Quantity:</label>
+            <input type="number" id="quantite" name="quantite" >
+        </div>
+        <div class="form-group">
+            <label for="product_image"><i class="fas fa-image"></i> Product Image:</label>
+            <input type="file" id="product_image" name="product_image" accept="image/*">
+        </div>
+        
+        <!-- Google reCAPTCHA -->
+        <div class="g-recaptcha" data-sitekey="6LfHbY8qAAAAAM07Z9-qQqHnKLmiCxMCmUJ2ER-y"></div>
 
-
-
+        <button type="submit" class="submit-btn">Add Product</button>
+    </form>
 
     <!-- Displaying the success/failure message below the form -->
     <?php if (isset($message)): ?>
@@ -151,6 +163,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php echo htmlspecialchars($message); ?>
         </div>
     <?php endif; ?>
-
 </body>
 </html>

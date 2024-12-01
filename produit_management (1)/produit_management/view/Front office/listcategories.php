@@ -59,25 +59,30 @@
 
         <div class="overlay-container">
 
-
         <?php foreach ($list as $category): ?>
-    <div class="category-overlay <?php echo strtolower($category['categorie_name']); ?>">
-        <a href="afficheproducts.php?id_categorie=<?php echo htmlspecialchars($category['id_categorie']); ?>" 
-           title="View products in <?php echo htmlspecialchars($category['categorie_name']); ?>" class="image-link">
-            <!-- Dynamically load images for each category -->
-            <?php if ($category['categorie_name'] == 'Fruits'): ?>
-                <img src="fruits.png" alt="Fruits" class="overlay-image">
-            <?php elseif ($category['categorie_name'] == 'Seeds'): ?>
-                <img src="seed.png" alt="Seeds" class="overlay-image">
-            <?php elseif ($category['categorie_name'] == 'Vegetables'): ?>
-                <img src="vegetables.png" alt="Vegetables" class="overlay-image">
-            <?php endif; ?>
-        </a>
-        <h2><?php echo htmlspecialchars($category['categorie_name']); ?></h2>
-        <p>Discover our fresh, seasonal <?php echo htmlspecialchars($category['categorie_name']); ?>, handpicked for maximum flavor and nutrition. Perfect for enhancing any meal, these vibrant items bring a burst of color and health to your table.</p>
-    </div>
-<?php endforeach; ?>
+            <div class="category-overlay <?php echo strtolower($category['categorie_name']); ?>">
 
+                <!-- Make the category name clickable -->
+                <a href="afficheproducts.php?id_categorie=<?php echo htmlspecialchars($category['id_categorie']); ?>" 
+                   title="View products in <?php echo htmlspecialchars($category['categorie_name']); ?>" class="category-link">
+                    <h2><?php echo htmlspecialchars($category['categorie_name']); ?></h2>
+                </a>
+
+                <!-- Dynamically load images for each category -->
+                <?php if ($category['categorie_name'] == 'Fruits'): ?>
+                    <img src="fruits.png" alt="Fruits" class="overlay-image">
+                <?php elseif ($category['categorie_name'] == 'Seeds'): ?>
+                    <img src="seed.png" alt="Seeds" class="overlay-image">
+                <?php elseif ($category['categorie_name'] == 'Vegetables'): ?>
+                    <img src="vegetables.png" alt="Vegetables" class="overlay-image">
+                <?php else: ?>
+                    <!-- Default category image if no specific category image is provided -->
+                    <img src="default-category-image.png" alt="Default Image" class="overlay-image">
+                <?php endif; ?>
+
+                <p>Discover our fresh, seasonal <?php echo htmlspecialchars($category['categorie_name']); ?>, handpicked for maximum flavor and nutrition. Perfect for enhancing any meal, these vibrant items bring a burst of color and health to your table.</p>
+            </div>
+        <?php endforeach; ?>
 
         </div>
     </main>

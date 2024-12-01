@@ -34,9 +34,16 @@
           <span class="links_name">Order list</span>
         </a>
       </li>
-      <!-- More links here -->
+      <!-- Categories Link -->
+      <li>
+        <a href="listCategorie.php">
+          <i class='bx bx-category' ></i>
+          <span class="links_name">Categories</span>
+        </a>
+      </li>
     </ul>
   </div>
+
   <section class="home-section">
     <nav>
       <div class="sidebar-button">
@@ -84,6 +91,12 @@
           if (this.id === "product-link") {
             event.preventDefault();  // Prevent default link behavior
             loadContent("listproduct.php");  // Dynamically load the listproduct.php page
+          }
+
+          // Load categories list when clicking on the "Categories" link
+          if (this.href.includes("listCategorie.php")) {
+            event.preventDefault();  // Prevent default link behavior
+            loadContent("listCategorie.php");  // Dynamically load the listCategorie.php page
           }
         });
       });

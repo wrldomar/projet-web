@@ -15,6 +15,7 @@ $products = $productController->getAllProducts();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product List</title>
     <style>
+
         /* General Styling for Table */
         table {
             width: 100%;

@@ -20,3 +20,4 @@ if (isset($_GET['id'])) {
     echo "Product ID is missing.";
 }
 ?>
+
