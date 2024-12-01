@@ -8,7 +8,7 @@ body, h1, h2, p, a, label, input, button {
 
 /* Body Background */
 body {
-    background: url('/view/front/asset/backG.png') no-repeat center center fixed; /* Replace 'your-background-image.jpg' with your image path */
+    background: url('backG.png') no-repeat center center fixed; /* Replace 'your-background-image.jpg' with your image path */
     background-size: cover;
     color: #333;
     padding: 20px;

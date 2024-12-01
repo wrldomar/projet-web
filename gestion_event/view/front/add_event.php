@@ -79,8 +79,8 @@ if (
     <div class="header-content">
       <h1 class="site-title">Tunisia </h1>
       <nav class="nav-links">
-        <a href="">Home</a>
-        <a href="">evenment</a>
+        <a href="home.html">Home</a>
+        <a href="../back/eventacc.php">evenment</a>
       </nav>
     </div>
 </header>

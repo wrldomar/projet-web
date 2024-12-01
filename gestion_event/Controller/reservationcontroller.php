@@ -19,7 +19,7 @@ class ReservationController
     
     if ($stmt->rowCount() == 0) {
         echo "Error: Event ID not found!";
-        return;
+        return false;  // Return false if event ID is not valid
     }
 
     // Proceed with the reservation if event ID is valid
@@ -38,8 +38,10 @@ class ReservationController
             'nbr_tickets' => $reservation->getNbrTickets(),
             'price' => $reservation->getPrice() // Assuming the price is already set
         ]);
+        return true;  // Return true if reservation is successfully added
     } catch (Exception $e) {
         echo 'Error: ' . $e->getMessage();
+        return false;  // Return false if an error occurs
     }
 }
 
@@ -114,6 +116,17 @@ public function listreservations() {
                 echo "Error: " . $e->getMessage(); 
             }
         }
+        public function searchReservationsByName($searchTerm) {
+            // Assuming you're using PDO to query the database
+            $query = "SELECT * FROM reservations WHERE name LIKE :searchTerm";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute(['searchTerm' => '%' . $searchTerm . '%']);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+    
+        // Other methods like listreservations...
+        
+       
 }
 
 

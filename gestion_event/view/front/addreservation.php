@@ -3,12 +3,20 @@
 include '../../Controller/reservationcontroller.php';  // Reservation controller class
 include '../../Controller/eventC.php';  // Event controller class
 
+// Load Composer's autoloader for PHPMailer
+require '../../phpmailer/src/Exception.php';
+require '../../phpmailer/src/PHPMailer.php';
+require '../../phpmailer/src/SMTP.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 // Initialize controllers
 $reservationController = new ReservationController();
 $eventController = new eventController();
 
-// Variable to store any errors
-$error = "";
+// Variable to store any errors or success messages
+$message = "";
 
 // Get the event ID from the URL (after clicking "RESERVE" on the back-end page)
 $id_event = isset($_GET['id_event']) ? $_GET['id_event'] : null;
@@ -16,7 +24,7 @@ $event = null;
 
 // Fetch event details if id_event is provided
 if ($id_event) {
-    $event = $eventController->showEvent($id_event); // Using showEvent to fetch the event by ID
+    $event = $eventController->showEvent($id_event);
 }
 
 if (
@@ -44,17 +52,48 @@ if (
             $totalPrice // Calculated price
         );
 
-        // Call the addReservation method from the controller to insert the data
+        // Add reservation to the database
         $reservationController->addReservation($reservation);
 
-        // Redirect to a confirmation page or reservation list (adjust URL as needed)
-        // header('Location: reservationList.php'); // Redirect after successful reservation
-        exit;
+        // Send confirmation email
+        $mail = new PHPMailer(true);
+        try {
+            // Server settings
+            $mail->isSMTP();
+            $mail->Host       = 'smtp.gmail.com'; // Replace with your SMTP server
+            $mail->SMTPAuth   = true;
+            $mail->Username   = 'obelhaj488@gmail.com'; // Replace with your email
+            $mail->Password   = 'ksoa zsug hrlg naos';   // Replace with your email password
+            $mail->SMTPSecure = 'ssl'; 
+            $mail->Port       = 465;
+
+            // Recipients
+            $mail->setFrom('obelhaj488@gmail.com', 'GreenHarvest');
+            $mail->addAddress($_POST['email']); // Send email to the user
+
+            // Content
+            $mail->isHTML(true);
+            $mail->Subject = 'Reservation Confirmation - GreenHarvest';
+            $mail->Body    = '<h1>Thank you for your reservation!</h1>'
+                . '<p>Dear ' . htmlspecialchars($_POST['first-name']) . ' ' . htmlspecialchars($_POST['last-name']) . ',</p>'
+                . '<p>You have successfully reserved ' . $numberOfTickets . ' ticket(s) for the event: ' 
+                . '<p><strong>Event Details:</strong></p>'
+                . '<p>Total Price: $' . $totalPrice . '</p>' 
+                . '<p>We look forward to seeing you at the event!</p>';
+
+            // Send email
+            $mail->send();
+            // Success message
+            $message = "Your reservation was successful! A confirmation email has been sent.";
+        } catch (Exception $e) {
+            $message = "Reservation made but email could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
     } else {
-        $error = "All fields are required!";
+        $message = "All fields are required!";
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -62,19 +101,60 @@ if (
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GreenHarvest - Vegetable & Fruit Event Reservation</title>
-    <link rel="stylesheet" href="rescss.css" />
+    <link rel="stylesheet" href="res.css" />
     <script src="reserv.js" defer></script>
+
+    <!-- Inline CSS for the buttons -->
+    <style>
+      /* Style for the buttons */
+      .button-group {
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      .button {
+        padding: 10px 20px;
+        background-color: #007BFF;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        margin: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        display: inline-block;
+      }
+
+      .button:hover {
+        background-color: #0056b3;
+      }
+    </style>
   </head>
+
   <body>
     <div class="header-bar">
       <h1 class="site-title">GreenHarvest</h1>
-     
     </div>
 
     <header></header>
 
     <section class="reservation-form">
       <h2>Reserve Your Spot</h2>
+
+      <!-- Display success message -->
+      <?php if ($message): ?>
+        <div class="success-message">
+          <p><?= htmlspecialchars($message); ?></p>
+          
+          <!-- Add buttons to navigate to home or view event -->
+          <div class="button-group">
+            <!-- Go to Home button -->
+            <a href="home.html" class="button">Go to Home</a>
+            
+            <!-- View Event button -->
+            <a href="../back/eventacc.php" class="button">View Event</a>
+          </div>
+        </div>
+      <?php endif; ?>
 
       <?php if ($event): ?>
         <!-- Show event details before the form -->
@@ -85,12 +165,7 @@ if (
 
         <!-- Form to reserve tickets -->
         <form action="addreservation.php" method="POST">
-        <input type="hidden" name="id_reservation" value="<?= htmlspecialchars($reservations['id_reservation']); ?>">
-
-
-        <input type="hidden" name="id_event" value="<?= htmlspecialchars($event['id_event']); ?>">
-
-          
+          <input type="hidden" name="id_event" value="<?= htmlspecialchars($event['id_event']); ?>">
 
           <label for="first-name">First Name</label>
           <input type="text" id="first-name" name="first-name" placeholder="Your First Name"  />
@@ -119,7 +194,7 @@ if (
         </form>
 
       <?php else: ?>
-        <p>Event not found.</p>
+        <p></p>
       <?php endif; ?>
     </section>
 
@@ -128,3 +203,5 @@ if (
     </footer>
   </body>
 </html>
+
+
