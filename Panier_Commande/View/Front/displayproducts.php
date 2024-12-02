@@ -41,7 +41,13 @@ try {
                         <td><?php echo htmlspecialchars($row['id']); ?></td>
                         <td><?php echo htmlspecialchars($row['name']); ?></td>
                         <td><?php echo htmlspecialchars($row['price']); ?></td>
-                        <td><a href="panier.html"></a><button>add to cart</button><a></td>
+                        <td>
+                            <form action="addtocart.php" method="post" style="display:inline;">
+                                <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($row['id']); ?>">
+                                <button type="submit">Add to Cart</button>
+                            </form>
+                        </td>
+
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>
@@ -51,7 +57,7 @@ try {
             <?php endif; ?>
         </tbody>
     </table>
- 
+    <a href="displaypanier.php"><button>Check your cart</button></a>
 </body>
 </html>
 <?php

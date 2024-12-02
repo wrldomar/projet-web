@@ -1,49 +1,68 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Select elements
-    const cartItems = document.querySelectorAll('.cart-item');
-    const totalPriceElement = document.querySelector('.cart-total');
+const quantityInput = document.getElementById('quantity');
 
-    // Function to update total price
-    function updateTotal() {
-        let total = 0;
-        cartItems.forEach((item) => {
-            const price = parseFloat(item.querySelector('.item-price').textContent.replace('$', ''));
-            const quantity = parseInt(item.querySelector('.quantity-input').value);
-            total += price * quantity;
-        });
-        totalPriceElement.textContent = `$${total.toFixed(2)}`;
+// Add an event listener for when the input value changes
+quantityInput.addEventListener('input', function () {
+// If the value is less than 1, reset it to 1
+    if (this.value < 1) {
+            alert("You can't put less than 1, if you want to remove it simply click on remove");
+            this.value = 1;
     }
-
-    // Add event listeners to buttons
-    cartItems.forEach((item) => {
-        const quantityInput = item.querySelector('.quantity-input');
-        const decreaseButton = item.querySelector('.quantity-button:first-child'); // First button (-)
-        const increaseButton = item.querySelector('.quantity-button:last-child'); // Last button (+)
-        const removeButton = item.querySelector('.remove-button');
-
-        // Decrease quantity
-        decreaseButton.addEventListener('click', () => {
-            let currentQuantity = parseInt(quantityInput.value);
-            if (currentQuantity > 1) {
-                quantityInput.value = currentQuantity - 1;
-                updateTotal();
-            }
-        });
-
-        // Increase quantity
-        increaseButton.addEventListener('click', () => {
-            let currentQuantity = parseInt(quantityInput.value);
-            quantityInput.value = currentQuantity + 1;
-            updateTotal();
-        });
-
-        // Remove item
-        removeButton.addEventListener('click', () => {
-            item.remove(); // Remove the item from the DOM
-            updateTotal(); // Recalculate total
-        });
-    });
-
-    // Initial total calculation
-    updateTotal();
 });
+
+// Ensure the input starts with a minimum of 1
+quantityInput.addEventListener('blur', function () {
+if (this.value === "" || this.value < 1) {
+        this.value = 1;
+    }
+});
+document.addEventListener("DOMContentLoaded", function () {
+    const productButton = document.getElementById("product-column"); // The Product button
+    const tableBody = document.querySelector("table tbody");
+
+    let ascending = true; // Sorting direction
+
+    productButton.addEventListener("click", function () {
+        // Get all rows from the table
+        const rows = Array.from(tableBody.querySelectorAll("tr"));
+
+        // Sort rows based on the product name in the first column
+        rows.sort((rowA, rowB) => {
+            const productA = rowA.querySelector("td:first-child").textContent.trim().toLowerCase();
+            const productB = rowB.querySelector("td:first-child").textContent.trim().toLowerCase();
+
+            return ascending
+                ? productA.localeCompare(productB)
+                : productB.localeCompare(productA);
+        });
+
+        // Toggle sorting direction
+        ascending = !ascending;
+
+        // Clear and re-append sorted rows
+        tableBody.innerHTML = "";
+        rows.forEach(row => tableBody.appendChild(row));
+
+        // Update button text to show sorting direction
+        productButton.textContent = `Product ${ascending ? "▲" : "▼"}`;
+    });
+});
+
+
+// Function to filter cart items based on the search query
+function searchCart() {
+// Get the search query and convert it to lowercase
+const query = document.getElementById("search-bar").value.toLowerCase();
+
+// Get all table rows
+const rows = document.querySelectorAll("table tbody tr");
+
+// Loop through each row and hide those that don't match the search query
+rows.forEach(row => {
+    const productName = row.querySelector("td:first-child").textContent.toLowerCase();
+    if (productName.includes(query)) {
+        row.style.display = "";  // Show row if it matches
+    } else {
+        row.style.display = "none";  // Hide row if it doesn't match
+    }
+});
+}
