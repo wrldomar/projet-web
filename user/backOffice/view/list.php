@@ -1,171 +1,79 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Sign In</title>
+  <link rel="stylesheet" href="login.css">
+  <script src="valider.js"></script>
+  <style>
+        .success-message {
+            color: green;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 14px;
+            color: #555;
+        }
+        .create-account {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .create-account:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Sign In</h2>
+    <form action="" method="post" onsubmit="return valider()">
+      <input type="text" placeholder="First Name" name="firstName" id="n1">
+      <input type="text" placeholder="Last Name" name="lastName" id="n2">
+      <br><br>
+      <button type="submit">Sign In</button>
+      <a href="home.html">
+        <button type="button" class="logout-button">Sign Out</button>
+      </a>
+    </form>
+    <br>
+    <a href="/projet-web/BackOffice/view/userForm.php" class="create-account">Create an account</a>
 <?php
+include $_SERVER['DOCUMENT_ROOT'] . '/projet-web/BackOffice/controller/UserController.php';
 
-//include "../controller/UserController.php";
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $nom = isset($_POST['firstName']) ? trim($_POST['firstName']) : '';
+    $prenom = isset($_POST['lastName']) ? trim($_POST['lastName']) : '';
 
-include 'C:/xampV.2/htdocs/projet-web/BackOffice/controller/UserController.php';
+    $userController = new UserController();
+    $user = $userController->getUserByName($nom, $prenom);
 
-$userController = new UserController();
+    if ($user && isset($user['nom']) && isset($user['prenom'])) {
 
-// Récupérer la liste de tous les utilisateurs
-$list = $userController->getAllUsers();
-
-// Styles CSS
-echo "
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-        background-color: #f4f4f9;
-    }
-    h2 {
-        color: #333;
-        text-align: center;
-        margin-bottom: 10px;
-        font-size: 24px;
-    }
-    table {
-        width: 90%;
-        margin: 20px auto;
-        border-collapse: collapse;
-        background-color: #fff;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    th, td {
-        border: 1px solid #ddd;
-        padding: 12px;
-        text-align: left;
-    }
-    th {
-        background-color: #4CAF50;
-        color: white;
-        font-weight: bold;
-    }
-    tr:nth-child(even) {
-        background-color: #f2f2f2;
-    }
-    tr:hover {
-        background-color: #ddd;
-    }
-    td {
-        color: #555;
-    }
-    /* Styles pour les boutons */
-    button {
-        border: none;
-        padding: 8px 16px;
-        font-size: 14px;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-    button:hover {
-        transform: scale(1.05);
-    }
-    button[type='submit']:not(.delete) {
-        background-color: #007BFF;
-        color: white;
-    }
-    button[type='submit']:not(.delete):hover {
-        background-color: #0056b3;
-    }
-    button.delete {
-        background-color: #FF4D4D;
-        color: white;
-    }
-    button.delete:hover {
-        background-color: #cc0000;
-    }
-</style>
-";
-
-echo "<h2>Clients</h2>";
-echo "<table>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Last Name</th>
-            <th>Date of Birth</th>
-            <th>Type</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Action</th>
-            <th>Account Status</th>
-        </tr>";
-
-foreach ($list as $row) {
-    if ($row['type'] === 'client') {
-        echo "<tr>
-                <td>{$row['id']}</td>
-                <td>{$row['nom']}</td>
-                <td>{$row['prenom']}</td>
-                <td>{$row['dateNaissance']}</td>
-                <td>{$row['type']}</td>
-                <td>{$row['email']}</td>
-                <td>{$row['telephone']}</td>
-                <td>
-                    <form method='post' action='edit.php' style='display:inline;'>
-                        <input type='hidden'  name='id' value='{$row['id']}'>
-                        <button type='submit'>Edit</button>
-                    </form>
-                    <form method='post' action='delete.php' style='display:inline;'>
-                        <input type='hidden' name='id' value='{$row['id']}'>
-                        <button type='submit' class='delete' onclick='return confirm(\"Are you sure you want to delete this user?\")'>Delete</button>
-                    </form>
-                </td>
-                <td>
-                <form  action='mail.php' style='display:inline;'>
-                    <button type='submit'>Activate</button>
-                </form>
-                </td>
-              </tr>";
-    }
+        echo "<div class='success-message'>Welcome, " . htmlspecialchars($user['nom']) . " " . htmlspecialchars($user['prenom']) . "!</div>";
+        
+        echo "<script>
+                setTimeout(function() {
+                    window.location.href = 'home.html';
+                }, 2000); 
+              </script>";
+    } 
 }
-echo "</table>";
-
-echo"<br></br>";
-
-echo "<h2>Farmers</h2>";
-echo "<table>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Last Name</th>
-            <th>Date of Birth</th>
-            <th>Type</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Action</th>
-             <th>Account Status</th>
-        </tr>";
-
-foreach ($list as $row) {
-    if ($row['type'] === 'farmer') {
-        echo "<tr>
-                <td>{$row['id']}</td>
-                <td>{$row['nom']}</td>
-                <td>{$row['prenom']}</td>
-                <td>{$row['dateNaissance']}</td>
-                <td>{$row['type']}</td>
-                <td>{$row['email']}</td>
-                <td>{$row['telephone']}</td>
-               <td>
-                    <form method='post' action='edit.php' style='display:inline;'>
-                        <input type='hidden'  name='id' value='{$row['id']}'>
-                        <button type='submit'>Edit</button>
-                    </form>
-                    <form method='post' action='delete.php' style='display:inline;'>
-                        <input type='hidden' name='id' value='{$row['id']}'>
-                        <button type='submit' class='delete' onclick='return confirm(\"Are you sure you want to delete this user?\")'>Delete</button>
-                    </form>
-                </td>
-                <td>
-                <form action='mail.php' style='display:inline;'>
-                    <button type='submit'>Activate</button>
-                </form>
-                </td>
-              </tr>";
-    }
-}
-echo "</table>";
 ?>
+<div class="footer">
+  <p>&copy; 2024 All Rights Reserved by GreenHarvest.</p>
+</div>
+</div>
+</body>
+</html>
