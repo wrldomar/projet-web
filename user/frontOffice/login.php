@@ -20,6 +20,19 @@
             font-size: 14px;
             color: #555;
         }
+        .create-account {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .create-account:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -34,6 +47,8 @@
         <button type="button" class="logout-button">Sign Out</button>
       </a>
     </form>
+    <br>
+    <a href="/projet-web/BackOffice/view/userForm.php" class="create-account">Create an account</a>
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . '/projet-web/BackOffice/controller/UserController.php';
 
@@ -54,10 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }, 2000); 
               </script>";
     } 
-    else {
-        header("Location: /projet-web/BackOffice/view/userForm.php");
-        exit();
-    }
 }
 ?>
 <div class="footer">
