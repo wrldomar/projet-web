@@ -120,7 +120,27 @@ public function getUserByName($nom,$prenom) {
     return null;
 }
 
+// Fonction pour récupérer le nombre des utulisateurs
+public function getUserCount() {
+    try {
+        $conn = Config::getConnection();
+        if ($conn) {
+            $sql = "SELECT COUNT(*) FROM users"; 
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_NUM);
+            return $result[0];
+        }
+    } catch (PDOException $e) {
+        die("Erreur lors du comptage des utilisateurs : " . $e->getMessage());
+    }
+    return 0;
+}
+
+
 
 }
+
+
 
 ?>
