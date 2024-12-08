@@ -14,6 +14,13 @@
             font-size: 16px;
             font-weight: bold;
         }
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
         .footer {
             text-align: center;
             margin-top: 50px;
@@ -49,6 +56,7 @@
     </form>
     <br>
     <a href="/projet-web/BackOffice/view/userForm.php" class="create-account">Create an account</a>
+
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . '/projet-web/BackOffice/controller/UserController.php';
 
@@ -60,7 +68,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = $userController->getUserByName($nom, $prenom);
 
     if ($user && isset($user['nom']) && isset($user['prenom'])) {
-
         echo "<div class='success-message'>Welcome, " . htmlspecialchars($user['nom']) . " " . htmlspecialchars($user['prenom']) . "!</div>";
         
         echo "<script>
@@ -68,9 +75,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     window.location.href = 'home.html';
                 }, 2000); 
               </script>";
-    } 
+    } else {
+        echo "<div class='error-message'>User not registered!</div>";
+    }
 }
 ?>
+
 <div class="footer">
   <p>&copy; 2024 All Rights Reserved by GreenHarvest.</p>
 </div>
