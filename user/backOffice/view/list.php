@@ -107,7 +107,9 @@ echo "
 <p class='user-count-message'>
     Total Number of Users : " . $userCount . "
 </p>";
+
 // Script JavaScript pour filtrer les données
+
 echo "
 <script>
     function filterTable() {
@@ -151,7 +153,7 @@ echo "<table >
             <th>Email</th>
             <th>Phone</th>
             <th>Action</th>
-            <th>Feedback</th>
+
         </tr>";
 
 foreach ($list as $row) {
@@ -174,11 +176,6 @@ foreach ($list as $row) {
                         <button type='submit' class='delete' onclick='return confirm(\"Are you sure you want to delete this user?\")'>Delete</button>
                     </form>
                 </td>
-                <td>
-                <form  action='mail.php' style='display:inline;'>
-                    <button type='submit'>Send</button>
-                </form>
-                </td>
               </tr>";
     }
 }
@@ -197,7 +194,6 @@ echo "<table>
             <th>Email</th>
             <th>Phone</th>
             <th>Action</th>
-            <th>Feedback</th>
         </tr>";
 
 foreach ($list as $row) {
@@ -219,11 +215,6 @@ foreach ($list as $row) {
                         <input type='hidden' name='id' value='{$row['id']}'>
                         <button type='submit' class='delete' onclick='return confirm(\"Are you sure you want to delete this user?\")'>Delete</button>
                     </form>
-                </td>
-                <td>
-                <form action='mail.php' style='display:inline;'>
-                    <button type='submit'>Send</button>
-                </form>
                 </td>
               </tr>";
     }
