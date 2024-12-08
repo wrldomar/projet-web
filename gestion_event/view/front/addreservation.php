@@ -27,73 +27,91 @@ if ($id_event) {
     $event = $eventController->showEvent($id_event);
 }
 
+// Function to verify Google reCAPTCHA
+function verifyReCaptcha($recaptchaResponse) {
+    $secretKey = '6LcFGZYqAAAAAA_aPe6HL3sAWOgvZvWXM2iRXkIr'; // Replace with your reCAPTCHA secret key
+    $url = "https://www.google.com/recaptcha/api/siteverify?secret=$secretKey&response=$recaptchaResponse";
+
+    $response = file_get_contents($url);
+    $responseKeys = json_decode($response, true);
+    
+    return isset($responseKeys["success"]) && $responseKeys["success"] === true;
+}
+
 if (
     isset($_POST["id_event"]) && isset($_POST["first-name"]) && isset($_POST["last-name"]) &&
-    isset($_POST["email"]) && isset($_POST["phone"]) && isset($_POST["tickets"])
+    isset($_POST["email"]) && isset($_POST["phone"]) && isset($_POST["tickets"]) &&
+    isset($_POST["g-recaptcha-response"])
 ) {
-    if (
-        !empty($_POST["id_event"]) && !empty($_POST["first-name"]) && !empty($_POST["last-name"]) &&
-        !empty($_POST["email"]) && !empty($_POST["phone"]) && !empty($_POST["tickets"])
-    ) {
-        // Calculate the price based on the number of tickets
-        $ticketPrice = 20; // Example price per ticket
-        $numberOfTickets = $_POST['tickets'];
-        $totalPrice = $ticketPrice * $numberOfTickets;
-
-        // Create a Reservation object using the form data and calculated price
-        $reservation = new Reservation(
-            null, // ID will be auto-generated
-            $_POST['id_event'], 
-            $_POST['first-name'],
-            $_POST['last-name'],
-            $_POST['email'],
-            $_POST['phone'],
-            $_POST['tickets'],
-            $totalPrice // Calculated price
-        );
-
-        // Add reservation to the database
-        $reservationController->addReservation($reservation);
-
-        // Send confirmation email
-        $mail = new PHPMailer(true);
-        try {
-            // Server settings
-            $mail->isSMTP();
-            $mail->Host       = 'smtp.gmail.com'; // Replace with your SMTP server
-            $mail->SMTPAuth   = true;
-            $mail->Username   = 'obelhaj488@gmail.com'; // Replace with your email
-            $mail->Password   = 'ksoa zsug hrlg naos';   // Replace with your email password
-            $mail->SMTPSecure = 'ssl'; 
-            $mail->Port       = 465;
-
-            // Recipients
-            $mail->setFrom('obelhaj488@gmail.com', 'GreenHarvest');
-            $mail->addAddress($_POST['email']); // Send email to the user
-
-            // Content
-            $mail->isHTML(true);
-            $mail->Subject = 'Reservation Confirmation - GreenHarvest';
-            $mail->Body    = '<h1>Thank you for your reservation!</h1>'
-                . '<p>Dear ' . htmlspecialchars($_POST['first-name']) . ' ' . htmlspecialchars($_POST['last-name']) . ',</p>'
-                . '<p>You have successfully reserved ' . $numberOfTickets . ' ticket(s) for the event: ' 
-                . '<p><strong>Event Details:</strong></p>'
-                . '<p>Total Price: $' . $totalPrice . '</p>' 
-                . '<p>We look forward to seeing you at the event!</p>';
-
-            // Send email
-            $mail->send();
-            // Success message
-            $message = "Your reservation was successful! A confirmation email has been sent.";
-        } catch (Exception $e) {
-            $message = "Reservation made but email could not be sent. Mailer Error: {$mail->ErrorInfo}";
-        }
+    // Verify reCAPTCHA response
+    $recaptchaResponse = $_POST["g-recaptcha-response"];
+    if (!verifyReCaptcha($recaptchaResponse)) {
+        $message = "reCAPTCHA verification failed. Please try again.";
     } else {
-        $message = "All fields are required!";
+        // Check if all form fields are filled
+        if (
+            !empty($_POST["id_event"]) && !empty($_POST["first-name"]) && !empty($_POST["last-name"]) &&
+            !empty($_POST["email"]) && !empty($_POST["phone"]) && !empty($_POST["tickets"])
+        ) {
+            // Calculate the price based on the number of tickets
+            $ticketPrice = 20; // Example price per ticket
+            $numberOfTickets = $_POST['tickets'];
+            $totalPrice = $ticketPrice * $numberOfTickets;
+
+            // Create a Reservation object using the form data and calculated price
+            $reservation = new Reservation(
+                null, // ID will be auto-generated
+                $_POST['id_event'], 
+                $_POST['first-name'],
+                $_POST['last-name'],
+                $_POST['email'],
+                $_POST['phone'],
+                $_POST['tickets'],
+                $totalPrice // Calculated price
+            );
+
+            // Add reservation to the database
+            $reservationController->addReservation($reservation);
+
+            // Send confirmation email
+            $mail = new PHPMailer(true);
+            try {
+                // Server settings
+                $mail->isSMTP();
+                $mail->Host       = 'smtp.gmail.com'; // Replace with your SMTP server
+                $mail->SMTPAuth   = true;
+                $mail->Username   = 'obelhaj488@gmail.com'; // Replace with your email
+                $mail->Password   = 'ksoa zsug hrlg naos';   // Replace with your email password
+                $mail->SMTPSecure = 'ssl'; 
+                $mail->Port       = 465;
+
+                // Recipients
+                $mail->setFrom('obelhaj488@gmail.com', 'GreenHarvest');
+                $mail->addAddress($_POST['email']); // Send email to the user
+
+                // Content
+                $mail->isHTML(true);
+                $mail->Subject = 'Reservation Confirmation - GreenHarvest';
+                $mail->Body    = '<h1>Thank you for your reservation!</h1>' .
+                    '<p>Dear ' . htmlspecialchars($_POST['first-name']) . ' ' . htmlspecialchars($_POST['last-name']) . ',</p>' .
+                    '<p>You have successfully reserved ' . $numberOfTickets . ' ticket(s) for the event: ' .
+                    '<p><strong>Event Details:</strong></p>' .
+                    '<p>Total Price: $' . $totalPrice . '</p>' .
+                    '<p>We look forward to seeing you at the event!</p>';
+
+                // Send email
+                $mail->send();
+                // Success message
+                $message = "Your reservation was successful! A confirmation email has been sent.";
+            } catch (Exception $e) {
+                $message = "Reservation made but email could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            }
+        } else {
+            $message = "All fields are required!";
+        }
     }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -102,7 +120,7 @@ if (
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GreenHarvest - Vegetable & Fruit Event Reservation</title>
     <link rel="stylesheet" href="res.css" />
-    <script src="reserv.js" defer></script>
+    <script src="res.js" defer></script>
 
     <!-- Inline CSS for the buttons -->
     <style>
@@ -187,6 +205,10 @@ if (
           <input type="number" id="tickets" name="tickets" min="1" max="100" placeholder="Enter number of tickets"  />
           <span id="tickets-message"></span>
 
+          <!-- reCAPTCHA widget -->
+          <div class="g-recaptcha" data-sitekey="6LcFGZYqAAAAAD7lBXz6zQrFh_-AsnhgcspoxC2_"></div>
+          <span id="recaptcha-message"></span>
+
           <div class="button-group">
             <button type="submit" class="reserve-btn">Reserve Now</button>
             <button type="button" class="cancel-btn">Cancel</button>
@@ -201,7 +223,8 @@ if (
     <footer>
       <p>&copy; 2024 GreenHarvest. All rights reserved.</p>
     </footer>
+
+    <!-- Load reCAPTCHA API -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   </body>
 </html>
-
-

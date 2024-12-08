@@ -274,3 +274,26 @@ footer p {
     font-size: 1em;
     font-weight: 400;
 }
+.go-to-calendar-btn {
+    display: inline-block;
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Padding around text */
+    font-size: 1.1em; /* Font size */
+    font-weight: bold; /* Bold text */
+    text-decoration: none; /* Remove underline */
+    border-radius: 5px; /* Rounded corners */
+    margin-top: 20px; /* Space from other elements */
+    text-align: center; /* Center align text */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+}
+
+.go-to-calendar-btn:hover {
+    background-color: #45a049; /* Darker green on hover */
+    transform: translateY(-3px); /* Slight upward movement */
+}
+
+.go-to-calendar-btn:focus {
+    outline: none; /* Remove default focus outline */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Add custom focus outline */
+}

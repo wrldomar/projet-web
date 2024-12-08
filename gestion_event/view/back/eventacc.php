@@ -50,13 +50,15 @@ $totalPages = ceil($totalEvents / $eventsPerPage);
                     </h1>
                 </div>
                 <div class="right-content">
-                    <div class="dropdown">
-                        <a href="#" class="link">Events</a>
-                        <div class="dropdown-menu">
-                            <a href="add_event.php" class="dropdown-link">Create Event</a>
-                            <a href="../back/eventacc.php" class="dropdown-link">View Events</a>
-                        </div>
-                    </div>
+            <div class="dropdown">
+              <a href="#" class="link">Events</a>
+              <div class="dropdown-menu">
+                <a href="add_event.php" class="dropdown-link">Create Event</a>
+                <a href="../back/eventacc.php" class="dropdown-link"
+                  >View Events</a
+                >
+              </div>
+            </div>
                     <a href="../contact/contact.html" class="link">Contact</a>
                     <div class="dropdown">
                         <a href="#" class="logo-link">
@@ -82,6 +84,8 @@ $totalPages = ceil($totalEvents / $eventsPerPage);
             <input type="date" name="end_date" value="<?= htmlspecialchars($endDate); ?>">
             <button type="submit">Filter</button>
         </form>
+        <!-- Add a button that links to the calendar -->
+        <a href="calendar.php" class="go-to-calendar-btn">Go to Calendar</a>
     </div>
 
     <div class="events-container">
@@ -137,4 +141,3 @@ $totalPages = ceil($totalEvents / $eventsPerPage);
     </footer>
 </body>
 </html>
-

@@ -1,0 +1,33 @@
+/* calendar.css */
+.calendar-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.calendar {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.calendar th, .calendar td {
+    width: 14.28%;
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+}
+
+.calendar td.has-event {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+}
+
+.calendar td {
+    cursor: pointer;
+}
+
+.calendar th {
+    background-color: #f4f4f4;
+}

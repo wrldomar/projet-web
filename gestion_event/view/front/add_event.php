@@ -1,60 +1,103 @@
 <?php
+// Include required files
 include '../../Controller/eventC.php';
-$error = "";
 
+
+require '../../phpmailer/src/Exception.php';
+require '../../phpmailer/src/PHPMailer.php';
+require '../../phpmailer/src/SMTP.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+$error = "";
 $event = null;
-// create an instance of the controller
+
+// Create an instance of the controller
 $eventC = new eventController();
 
+// Validate and process form submission
 if (
     isset($_POST["id_fermier"]) && isset($_POST["nom_event"]) && isset($_POST["location_event"]) &&
     isset($_POST["describtion"]) && isset($_POST["Date"]) && isset($_POST["heure"]) &&
     isset($_POST["duration"]) && isset($_POST["Max_Tickets"]) && isset($_POST["Ticket_price"])
 ) {
-    // Validate that required fields are not empty
+    // Check if fields are not empty
     if (
         !empty($_POST["id_fermier"]) && !empty($_POST["nom_event"]) && !empty($_POST["location_event"]) &&
         !empty($_POST["describtion"]) && !empty($_POST["Date"]) && !empty($_POST["heure"]) &&
         !empty($_POST["duration"]) && !empty($_POST["Max_Tickets"]) && !empty($_POST["Ticket_price"])
     ) {
-        // Process the image upload if present
+        // Handle image upload
+        $image_url = null;
         if (isset($_FILES['image_url']) && $_FILES['image_url']['error'] === UPLOAD_ERR_OK) {
-            $uploadDir = 'uploads/'; // Directory to store uploaded images
+            $uploadDir = 'uploads/';
             if (!is_dir($uploadDir)) {
-                mkdir($uploadDir, 0777, true); // Create directory if it doesn't exist
+                mkdir($uploadDir, 0777, true);
             }
-    
+
             $imageTmpName = $_FILES['image_url']['tmp_name'];
             $imageName = basename($_FILES['image_url']['name']);
-            $imagePath ='../front/'. $uploadDir . uniqid() . '_' . $imageName;
-
+            $imagePath = '../front/' . $uploadDir . uniqid() . '_' . $imageName;
 
             if (move_uploaded_file($imageTmpName, $imagePath)) {
                 $image_url = $imagePath;
-            } else {
-                $image_url = null; // Handle upload failure
             }
         }
 
         // Create event object
         $event = new event(
-            (int) $_POST['id_fermier'],               // Cast id_agence to integer
-            $_POST['nom_event'],                     // Event name
-            $_POST['location_event'],                // Event location
-            $_POST['describtion'],                   // Event description
-            new DateTime($_POST['Date']),            // Event date
-            $_POST['heure'],                         // Event time
-            $_POST['duration'],                      // Event duration
-            (int) $_POST['Max_Tickets'],             // Maximum tickets
-            (float) $_POST['Ticket_price'],          // Ticket price
-            false,                                   // Example: Use default value for "status"
-            $imagePath                 
+            (int)$_POST['id_fermier'],
+            $_POST['nom_event'],
+            $_POST['location_event'],
+            $_POST['describtion'],
+            new DateTime($_POST['Date']),
+            $_POST['heure'],
+            $_POST['duration'],
+            (int)$_POST['Max_Tickets'],
+            (float)$_POST['Ticket_price'],
+            false,  // Default status
+            $image_url
         );
-       
 
         // Add event to the database
         if ($eventC->addevent($event)) {
-            header('Location:evenlist.php'); // Redirect to event list on success
+            // Send confirmation email
+            $mail = new PHPMailer(true);
+            try {
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com';
+                $mail->SMTPAuth = true;
+                $mail->Username = 'obelhaj488@gmail.com';  // Replace with your email
+                $mail->Password = 'ksoa zsug hrlg naos';   // Use a secure app password
+                $mail->SMTPSecure = 'ssl';
+                $mail->Port = 465;
+
+                $mail->setFrom('obelhaj488@gmail.com', 'GreenHarvest');
+                $userEmail = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+
+                if ($userEmail) {
+                    $mail->addAddress($_POST['email']);
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Reservation Confirmation - GreenHarvest';
+                    $mail->Body = "
+                        <h1>Thank you for your reservation!</h1>
+                        <p>Dear {$_POST['first-name']} {$_POST['last-name']},</p>
+                        <p>You have successfully reserved {$_POST['Max_Tickets']} ticket(s) for the event:</p>
+                        <p><strong>{$_POST['nom_event']}</strong></p>
+                        <p>Total Price: $" . ($_POST['Max_Tickets'] * $_POST['Ticket_price']) . "</p>
+                        <p>We look forward to seeing you at the event!</p>
+                    ";
+
+                    $mail->send();
+                    header('Location:evenlist.php');  // Redirect on success
+                    exit();
+                } else {
+                    $error = "Event added, but email could not be sent. Invalid email address.";
+                }
+            } catch (Exception $e) {
+                $error = "Event added, but email could not be sent. Error: {$mail->ErrorInfo}";
+            }
         } else {
             $error = "Failed to add the event.";
         }
@@ -63,6 +106,7 @@ if (
     }
 }
 ?>
+
 
 
 <!DOCTYPE html>

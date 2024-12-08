@@ -67,12 +67,13 @@ validateField(
   "Not a valid number of tickets."
 );
 
-// Request permission for notifications
-if ("Notification" in window) {
-  Notification.requestPermission().then(function (permission) {
-    if (permission === "granted") {
-      console.log("Notification permission granted.");
-    }
+// Function to load reCAPTCHA and append the token to the form
+function loadReCaptcha() {
+  const siteKey = "YOUR_SITE_KEY"; // Replace with your reCAPTCHA site key
+  grecaptcha.ready(function () {
+    grecaptcha.execute(siteKey, { action: "submit" }).then(function (token) {
+      document.getElementById("g-recaptcha-response").value = token;
+    });
   });
 }
 
@@ -87,26 +88,27 @@ document
       phoneValid(document.getElementById("phone").value) &&
       ticketsValid(document.getElementById("tickets").value);
 
+    const captchaToken = document.getElementById("g-recaptcha-response").value;
+    const captchaMessage = document.getElementById("recaptcha-message");
+
+    if (!captchaToken) {
+      // Display message if reCAPTCHA is not filled
+      captchaMessage.textContent = "reCAPTCHA is required!";
+      captchaMessage.style.color = "red";
+      event.preventDefault(); // Prevent form submission
+      return;
+    } else {
+      captchaMessage.textContent = ""; // Clear error message if reCAPTCHA is filled
+    }
+
     if (isValid) {
-      // Form is valid, show success message
-      alert("Your reservation was successful!");
-
-      // Show notification with reservation details
-      const title = "Reservation Successful!";
-      const options = {
-        body: `Event: ${document.getElementById("event-name").value}\nDate: ${
-          document.getElementById("event-date").value
-        }\nTickets: ${document.getElementById("tickets").value}`,
-        icon: "notification-icon.png", // Replace with your icon
-        tag: "reservation-notification",
-      };
-
-      if (Notification.permission === "granted") {
-        new Notification(title, options);
-      }
+      // Load reCAPTCHA token
+      loadReCaptcha();
 
       // Optionally, submit the form here using fetch() for asynchronous submission
-      document.querySelector("form").submit();
+      setTimeout(() => {
+        document.querySelector("form").submit(); // Submit form after token is ready
+      }, 1000); // Delay form submission to allow reCAPTCHA token generation
     } else {
       // Form is not valid, show alert and prevent submission
       alert("Please fix the errors before submitting.");
@@ -128,6 +130,19 @@ document
       emailValid(document.getElementById("email").value) &&
       phoneValid(document.getElementById("phone").value) &&
       ticketsValid(document.getElementById("tickets").value);
+
+    const captchaToken = document.getElementById("g-recaptcha-response").value;
+    const captchaMessage = document.getElementById("recaptcha-message");
+
+    if (!captchaToken) {
+      // Display message if reCAPTCHA is not filled
+      captchaMessage.textContent = "reCAPTCHA is required!";
+      captchaMessage.style.color = "red";
+      e.preventDefault(); // Prevent form submission
+      return;
+    } else {
+      captchaMessage.textContent = ""; // Clear error message if reCAPTCHA is filled
+    }
 
     if (isValid) {
       // Show the success message
