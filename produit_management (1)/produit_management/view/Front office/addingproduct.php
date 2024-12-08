@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </a>
                 <a href="../../../../home/view/front office/home.html" class="link">Home</a>
                 <div class="dropdown">
-                    <a href="../Shop/shop1.html" class="link">Shop</a>
+                    <a href="./listcategories.php" class="link">Shop</a>
                     <div class="dropdown-menu">
                         <a href="../produit_management/view/Front office/addingproduct.php" class="dropdown-link">Sell Product</a>
                     </div>
@@ -139,11 +139,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="text" id="name_product" name="name_product" >
         </div>
         <div class="form-group">
-            <label for="product_price"><i class="fas fa-dollar-sign"></i> Product Price:</label>
+            <label for="product_price"><i class="fas fa-dollar-sign"></i> Product Price per Kilo (MILLIMES):</label>
             <input type="number" step="0.01" id="product_price" name="product_price" >
         </div>
         <div class="form-group">
-            <label for="quantite"><i class="fas fa-box"></i> Quantity:</label>
+            <label for="quantite"><i class="fas fa-box"></i> Quantity (KG):</label>
             <input type="number" id="quantite" name="quantite" >
         </div>
         <div class="form-group">

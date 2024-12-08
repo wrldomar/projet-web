@@ -437,3 +437,84 @@ nav .profile-details i{
     width: calc(100% - 60px);
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+/* Header Styling */
+th {
+  background-color: #4caf50;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Row Styling */
+tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Image Styling */
+td img {
+  max-width: 100px;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Action Links Styling */
+td a {
+  color: #4caf50;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+td a:hover {
+  background-color: #4caf50;
+  color: white;
+}
+
+
+
+/* Add some margin and padding to the page */
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 20px;
+  padding: 0;
+  background-color: #f9f9f9;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}

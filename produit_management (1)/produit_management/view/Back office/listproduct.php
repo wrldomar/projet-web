@@ -1,11 +1,23 @@
 <?php
 include '../../controller/productcontroller.php';
 
-// Create an instance of the ProductController class
 $productController = new ProductController();
 
-// Retrieve all products from the database
-$products = $productController->getAllProducts();
+// Number of products per page
+$productsPerPage = 99;
+
+// Get the current page from the URL (default to 1 if not set)
+$currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+// Get the search query from the URL (if provided)
+$searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
+
+// Calculate the offset for SQL query based on the current page
+$offset = ($currentPage - 1) * $productsPerPage;
+
+// Fetch products based on the search term
+$products = $productController->getAllProducts($searchTerm, $productsPerPage, $offset);
+
 ?>
 
 <!DOCTYPE html>
@@ -14,13 +26,15 @@ $products = $productController->getAllProducts();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product List</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <style>
 
-        /* General Styling for Table */
+
         table {
-            width: 100%;
+            width: 75%;
             border-collapse: collapse;
-            margin: 20px 0;
+            margin: 20px 300px;
             font-size: 16px;
             font-family: 'Poppins', sans-serif;
         }
@@ -31,7 +45,6 @@ $products = $productController->getAllProducts();
             border-bottom: 1px solid #f1f1f1;
         }
 
-        /* Header Styling */
         th {
             background-color: #4caf50;
             color: white;
@@ -39,7 +52,6 @@ $products = $productController->getAllProducts();
             letter-spacing: 1px;
         }
 
-        /* Row Styling */
         tr:nth-child(even) {
             background-color: #fafafa;
         }
@@ -48,14 +60,12 @@ $products = $productController->getAllProducts();
             background-color: #f1f1f1;
         }
 
-        /* Image Styling */
         td img {
             max-width: 100px;
             height: auto;
             border-radius: 8px;
         }
 
-        /* Action Links Styling */
         td a {
             color: #4caf50;
             text-decoration: none;
@@ -74,7 +84,6 @@ $products = $productController->getAllProducts();
             background-color: #2e8b39;
         }
 
-        /* Confirm Delete Styling */
         a.delete-btn {
             color: #e74c3c;
         }
@@ -83,26 +92,46 @@ $products = $productController->getAllProducts();
             background-color: #e74c3c;
             color: white;
         }
-
-        /* Add some margin and padding to the page */
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 20px;
-            padding: 0;
-            background-color: #f9f9f9;
-        }
-
-        h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
     </style>
 </head>
 <body>
+<div class="sidebar">
+    <div class="logo-details">
+      <i class='bx bxl-google'></i>
+      <a href="../../../../home/view/front office/home.html" class="logo-link">
+      <span class="logo_name">GreenHarvest</span>
+      </a>
+    </div>
+    <ul class="nav-links">
+      <li>
+        <a href="#" class="nav-link" id="product-link">
+          <i class='bx bx-box'></i>
+          <span class="links_name">Product</span>
+        </a>
+      </li>
+
+      <!-- Categories Link -->
+      <li>
+        <a href="listCategorie.php">
+          <i class='bx bx-category'></i>
+          <span class="links_name">Categories</span>
+        </a>
+      </li>
+
+      <!-- Comments Link -->
+      <li>
+        <a href="#" class="nav-link" id="comments-link">
+          <i class='bx bx-message'></i>
+          <span class="links_name">Comments</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
 
 <h1>Product List</h1>
+
+
 
 <table>
     <thead>
@@ -119,21 +148,23 @@ $products = $productController->getAllProducts();
     </thead>
     <tbody>
         <?php
-        // Loop through each product and display it in a table row
-        foreach ($products as $product) {
-            echo "<tr>";
-            echo "<td>" . htmlspecialchars($product['id_product']) . "</td>";
-            echo "<td>" . htmlspecialchars($product['id_farmer']) . "</td>";
-            echo "<td>" . htmlspecialchars($product['id_categorie']) . "</td>";
-            echo "<td>" . htmlspecialchars($product['name_product']) . "</td>";
-            echo "<td>" . htmlspecialchars($product['product_price']) . "</td>";
-            echo "<td>" . htmlspecialchars($product['quantite']) . "</td>";
-            echo "<td><img src='" . htmlspecialchars('../Front office/'.$product['product_image']) . "' alt='Product Image'></td>";
-            echo "<td>
-                    <a href='editProduct.php?id=" . $product['id_product'] . "'>Edit</a> | 
-                    <a href='deleteProduct.php?id=" . $product['id_product'] . "' onclick='return confirm(\"Are you sure you want to delete this product?\")' class='delete-btn'>Delete</a>
-                  </td>";
-            echo "</tr>";
+        if (!empty($products)) {
+            foreach ($products as $product) {
+                echo "<tr>";
+                echo "<td>" . htmlspecialchars($product['id_product']) . "</td>";
+                echo "<td>" . htmlspecialchars($product['id_farmer']) . "</td>";
+                echo "<td>" . htmlspecialchars($product['id_categorie']) . "</td>";
+                echo "<td>" . htmlspecialchars($product['name_product']) . "</td>";
+                echo "<td>" . htmlspecialchars($product['product_price']) . "</td>";
+                echo "<td>" . htmlspecialchars($product['quantite']) . "</td>";
+                echo "<td><img src='" . htmlspecialchars('../Front office/'.$product['product_image']) . "' alt='Product Image'></td>";
+                echo "<td>
+                        <a href='editProduct.php?id=" . $product['id_product'] . "'>Edit</a> | 
+                        <a href='deleteProduct.php?id=" . $product['id_product'] . "' onclick='return confirm(\"Are you sure you want to delete this product?\")' class='delete-btn'>Delete</a>
+                      </td>";
+                echo "</tr>";
+            }
+        
         }
         ?>
     </tbody>

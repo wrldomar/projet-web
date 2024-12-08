@@ -48,117 +48,105 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Add Category</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet">
+
+
     <style>
-        /* Sidebar Styling */
-        body {
-            display: flex;
-            margin: 0;
-        }
+ /* Add Category Section */
+.home-section .add-category {
+    padding: 20px 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 600px;
+}
 
-        .sidebar {
-            width: 250px;
-            height: 100vh;
-            background-color: #4caf50;
-            color: #fff;
-            padding: 20px;
-            box-sizing: border-box;
-        }
+.add-category h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #4caf50;
+    font-weight: 600;
+    border-bottom: 2px solid #4caf50;
+    padding-bottom: 10px;
+}
 
-        .logo-details {
-            display: flex;
-            align-items: center;
-        }
+/* Form Styling */
+.add-category form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
 
-        .logo-name {
-            font-size: 22px;
-            margin-left: 10px;
-        }
+.add-category .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
-        .nav-links {
-            list-style-type: none;
-            padding: 0;
-            margin-top: 40px;
-        }
+.add-category label {
+    font-size: 16px;
+    color: #333;
+    font-weight: 500;
+}
 
-        .nav-links li {
-            margin-bottom: 20px;
-        }
+.add-category input[type="text"],
+.add-category input[type="file"] {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    transition: border-color 0.3s ease;
+}
 
-        .nav-links a {
-            color: #fff;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            font-size: 16px;
-        }
+.add-category input[type="text"]:focus,
+.add-category input[type="file"]:focus {
+    border-color: #4caf50;
+    outline: none;
+    box-shadow: 0 0 4px rgba(76, 175, 80, 0.4);
+}
 
-        .nav-links i {
-            font-size: 20px;
-            margin-right: 10px;
-        }
+/* Button Styling */
+.add-category button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
 
-        .nav-links .active {
-            background-color: #3e8e41;
-        }
+.add-category button:hover {
+    background-color: #45a049;
+    transform: scale(1.02);
+}
 
-        .home-section {
-            flex: 1;
-            background-color: #f9f9f9;
-            padding: 20px;
-        }
+/* Responsive Design for Add Category */
+@media (max-width: 768px) {
+    .add-category {
+        margin: 10px;
+        padding: 15px;
+    }
 
-        .form-group {
-            margin-bottom: 15px;
-        }
+    .add-category button {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
 
-        input[type="text"],
-        input[type="file"],
-        button {
-            width: 100%;
-            padding: 10px;
-            font-size: 14px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
 
-        button {
-            background-color: #4caf50;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
 
-        button:hover {
-            background-color: #45a049;
-        }
 
-        h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        form {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
-            margin: auto;
-        }
-
-        .search-box input {
-            padding: 8px;
-            font-size: 14px;
-        }
-
-        .search-box {
-            margin-left: auto;
-            margin-right: 20px;
-        }
     </style>
+
 </head>
 <body>
     <!-- Sidebar -->
@@ -170,12 +158,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </a>
         </div>
         <ul class="nav-links">
-            <li>
-                <a href="#" class="active">
-                    <i class='bx bx-grid-alt'></i>
-                    <span class="links_name">Dashboard</span>
-                </a>
-            </li>
+        <li>
+        <a href="./listProduct.php" class="nav-link" id="product-link">
+          <i class='bx bx-box' ></i>
+          <span class="links_name">Product</span>
+        </a>
+      </li>
+
             <li>
                 <a href="listCategorie.php">
                     <i class='bx bx-category'></i>
@@ -187,11 +176,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <!-- Main Content Area -->
     <section class="home-section">
+    <div class="add-category">
         <h1>Add Category</h1>
         <form method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="categorie_name">Category Name:</label>
-                <input type="text" name="categorie_name" id="categorie_name" required>
+                <input type="text" name="categorie_name" id="categorie_name" >
             </div>
             <div class="form-group">
                 <label for="categorie_image">Category Image:</label>
@@ -199,7 +189,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <button type="submit">Add Category</button>
         </form>
-    </section>
+    </div>
+</section>
+
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -212,6 +204,73 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 });
             });
         });
+
+
+
+
+
+
+        document.addEventListener("DOMContentLoaded", () => {
+        const form = document.querySelector("form");
+        const categoryNameInput = document.querySelector("#categorie_name");
+        const categoryImageInput = document.querySelector("#categorie_image");
+        const submitButton = form.querySelector("button");
+
+        // Create error message containers
+        const categoryNameError = document.createElement("div");
+        categoryNameError.className = "error-message";
+        categoryNameInput.parentElement.appendChild(categoryNameError);
+
+        const categoryImageError = document.createElement("div");
+        categoryImageError.className = "error-message";
+        categoryImageInput.parentElement.appendChild(categoryImageError);
+
+        // Image Preview
+        const imagePreview = document.createElement("img");
+        imagePreview.style.display = "none";
+        imagePreview.style.marginTop = "10px";
+        imagePreview.style.maxWidth = "200px";
+        imagePreview.style.borderRadius = "8px";
+        categoryImageInput.parentElement.appendChild(imagePreview);
+
+        categoryImageInput.addEventListener("change", (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    imagePreview.src = reader.result;
+                    imagePreview.style.display = "block";
+                };
+                reader.readAsDataURL(file);
+            } else {
+                imagePreview.style.display = "none";
+            }
+        });
+
+        // Form Validation
+        form.addEventListener("submit", (event) => {
+            let isValid = true;
+
+            // Reset error messages
+            categoryNameError.textContent = "";
+            categoryImageError.textContent = "";
+
+            if (!categoryNameInput.value.trim()) {
+                categoryNameError.textContent = "Category name is required.";
+                isValid = false;
+            }
+
+            if (!categoryImageInput.files.length) {
+                categoryImageError.textContent = "Please select a category image.";
+                isValid = false;
+            }
+
+            if (!isValid) {
+                event.preventDefault(); // Stop form submission
+            }
+        });
+    });
+
     </script>
 </body>
 </html>

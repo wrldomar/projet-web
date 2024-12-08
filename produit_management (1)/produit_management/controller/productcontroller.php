@@ -65,7 +65,7 @@ class ProductController {
     }
 
     // Function to get all products with search and pagination
-    public function getAllProducts($search_query = '', $limit = 10, $offset = 0) {
+    public function getAllProducts($search_query = '', $limit = 6, $offset = 0) {
         $db = config::getConnexion();
         $sql = "SELECT * FROM products WHERE 1";
         
@@ -180,22 +180,8 @@ class ProductController {
         }
     }
 
-    // Function to get product by ID
-    public function getProductById($id_product) {
-        try {
-            $db = config::getConnexion();
-            $query = "SELECT * FROM products WHERE id_product = :id_product";
-            $stmt = $db->prepare($query);
-            $stmt->bindParam(':id_product', $id_product);
-            $stmt->execute();
-            return $stmt->fetch();
-        } catch (Exception $e) {
-            echo "Error: " . $e->getMessage();
-            return null;
-        }
-    }
 
-    
+    //recherche 
         public function searchProductsByName($searchTerm) {
             $db = config::getConnexion();
             $sql = "SELECT * FROM products WHERE name_product LIKE :searchTerm";
@@ -209,6 +195,45 @@ class ProductController {
             }
         }
     
+        public function BackSearchByName($searchTerm) {
+            $db = config::getConnexion();
+            $sql = "SELECT * FROM products WHERE name_product LIKE :searchTerm";
+            
+            try {
+                $query = $db->prepare($sql);
+                $query->execute(['searchTerm' => '%' . $searchTerm . '%']);
+                $results = $query->fetchAll(PDO::FETCH_ASSOC);
+                
+                // Debugging: Check if the results are correct
+                if (empty($results)) {
+                    echo "No products found for the search term.";
+                }
+                
+                return $results;
+            } catch (Exception $e) {
+                die('Error: ' . $e->getMessage());
+            }
+        }
+        
+        public function getProductById($id_product) {
+            $db = config::getConnexion();
+            $sql = "SELECT * FROM products WHERE id_product = :id_product";  // Query to fetch product by ID
+            
+            try {
+                $query = $db->prepare($sql);
+                $query->bindValue(':id_product', $id_product, PDO::PARAM_INT);  // Bind the product ID to the query
+                $query->execute();
+                
+                // Fetch and return the product data
+                $result = $query->fetch(PDO::FETCH_ASSOC);
+                return $result ? $result : null;  // Return the product data or null if not found
+            } catch (Exception $e) {
+                die('Error: ' . $e->getMessage());
+            }
+        }
+
+
+        
         
     
 }

@@ -148,6 +148,12 @@ main {
     margin-bottom: 40px;
 }
 
+
+
+
+
+
+
 /* Category Overlay Container */
 .overlay-container {
     display: flex;
@@ -188,7 +194,7 @@ main {
 /* Overlay Text */
 .category-overlay h2 {
     font-size: 1.4rem;
-    color: #ffffffb6;
+    color: #0f5f16;
     margin-top: 15px;
 }
 
@@ -205,7 +211,7 @@ main {
 }
 
 .category-overlay:hover h2 {
-    color: #28a745;
+    color: #3aad4d;
 }
 
 /* Optional: Fade effect for text and images on hover */
@@ -216,43 +222,18 @@ main {
 .category-overlay:hover p {
     color: #ffffff;
 }
+/* Remove underline from category links */
+.category-link {
+    text-decoration: none; /* Removes the underline */
+    color: inherit; /* Keeps the text color consistent with its parent */
+}
+
+/* Optional: Add hover effect */
+.category-link:hover {
+    color: #28a745; /* Example: Change text color on hover */
+}
 
 
-
-
-
-
-
-
-
-
-/* Base styles for category overlays */
-.category-overlay {
-    transition: filter 0.3s ease, opacity 0.3s ease; /* Smooth blur effect */
-  }
-  
-  /* When hovering on the Fruits category */
-  .category-overlay.fruits:hover ~ .category-overlay.seed,
-  .category-overlay.fruits:hover ~ .category-overlay.vegetables {
-    filter: blur(5px); /* Blur effect */
-    opacity: 0.5; /* Reduce opacity */
-  }
-  
-  /* When hovering on the Seeds category */
-  .category-overlay.seed:hover ~ .category-overlay.fruits,
-  .category-overlay.seed:hover ~ .category-overlay.vegetables {
-    filter: blur(5px); /* Blur effect */
-    opacity: 0.5; /* Reduce opacity */
-  }
-  
-  /* When hovering on the Vegetables category */
-  .category-overlay.vegetables:hover ~ .category-overlay.fruits,
-  .category-overlay.vegetables:hover ~ .category-overlay.seed {
-    filter: blur(5px); /* Blur effect */
-    opacity: 0.5; /* Reduce opacity */
-  }
-  
-  
 
 
 

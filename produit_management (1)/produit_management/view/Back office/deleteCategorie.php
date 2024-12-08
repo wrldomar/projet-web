@@ -165,7 +165,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form method="POST">
             <div class="form-group">
                 <label for="categorie_name">Category Name:</label>
-                <input type="text" name="categorie_name" id="categorie_name" required>
+                <input type="text" name="categorie_name" id="categorie_name" >
             </div>
             <button type="submit">Delete Category</button>
         </form>
