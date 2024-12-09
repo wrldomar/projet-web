@@ -15,6 +15,7 @@ if (this.value === "" || this.value < 1) {
         this.value = 1;
     }
 });
+
 document.addEventListener("DOMContentLoaded", function () {
     const productButton = document.getElementById("product-column"); // The Product button
     const tableBody = document.querySelector("table tbody");
@@ -51,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // Function to filter cart items based on the search query
 function searchCart() {
 // Get the search query and convert it to lowercase
-const query = document.getElementById("search-bar").value.toLowerCase();
+const query = document.getElementById("searchbar").value.toLowerCase();
 
 // Get all table rows
 const rows = document.querySelectorAll("table tbody tr");

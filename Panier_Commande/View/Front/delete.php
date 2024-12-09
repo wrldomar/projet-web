@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idpanier'])) {
 
         if ($stmt->execute()) {
             // Redirect back to the main page with a success message
-            header("Location: displaypanier.php?message=Item removed successfully");
+            header("Location: displaypanier.php?");
             exit;
         } else {
             echo "Error removing item.";

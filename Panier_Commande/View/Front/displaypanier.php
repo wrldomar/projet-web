@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idpanier'])) {
         $stmt->bindParam(':prixtotal', $newprice, PDO::PARAM_INT);
 
         if ($stmt->execute()) {
-            header("Location: displaypanier.php?message=Item updated successfully");
+            header("Location: displaypanier.php?");
             exit;
         } else {
             echo "Error updating item.";
@@ -72,7 +72,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['idpanier'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carts</title>
-    <link href="products.css" rel="stylesheet">
+    <link href="cart.css" rel="stylesheet">
+    
 </head>
 <body>
     <h1>Cart</h1>
@@ -128,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['idpanier'])) {
                             </form>
                             <form action="delete.php" method="post" style="display:inline;">
                                 <input type="hidden" name="idpanier" value="<?php echo htmlspecialchars($row['idpanier']); ?>">
-                                <button type="submit">Remove</button>
+                                <button type="submit" id="remove">Remove</button>
                             </form>
                         </td>
                     </tr>
@@ -140,10 +141,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['idpanier'])) {
             <?php endif; ?>
         </tbody>
     </table>
-    <a href="displayproducts.php"><button>Return to products list</button></a>
+    <a href="displayproducts.php"><button id="rtpl">Return to products list</button></a>
     <br>
     <br>
-    <a href="commande.php"><button>Place Order</button></a>
+    <a href="viewcart.php?user_id=1"><button>Place Order</button></a>
     <script src="panier.js"></script>
 
 </body>

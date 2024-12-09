@@ -3,7 +3,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 20px;
-    background-color: rgb(149, 189, 149);
+    background-color: #f3fef3; /* Light green background */
     color: #2e4d2e; /* Dark green text */
 }
 
@@ -112,3 +112,39 @@ a:hover {
     padding: 0;
     text-align: left;
 }
+
+/* Search Bar */
+#searchbar {
+    width: 90%;
+    display: block;
+    margin: 20px auto;
+    padding: 12px;
+    border: 2px solid #4CAF50;
+    border-radius: 25px;
+    box-sizing: border-box;
+    font-size: 16px;
+    color: #333;
+    background: linear-gradient(90deg, #e8f5e9, #ffffff);
+    transition: all 0.3s ease-in-out;
+}
+
+#searchbar:focus {
+    border-color: #388e3c;
+    background: linear-gradient(90deg, #ffffff, #e8f5e9);
+    outline: none;
+    box-shadow: 0 0 10px rgba(72, 239, 128, 0.7);
+}
+
+#searchbar::placeholder {
+    color: #9e9e9e;
+    font-style: italic;
+}
+
+body {
+    background-color: rgb(149, 189, 149);
+}
+
+#remove {
+    background-color: red;
+}
+
