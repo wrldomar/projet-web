@@ -14,12 +14,12 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            flex-direction: column; /* Ensure elements stack vertically */
+            flex-direction: column;
         }
 
         /* Footer Styles */
         .footer {
-            margin-bottom: 20px; /* Space between footer and form */
+            margin-bottom: 20px;
             text-align: center;
             color: white;
             font-size: 14px;
@@ -92,25 +92,62 @@
                 padding: 20px;
                 max-width: 100%;
             }
-        } 
+        }
+
+        /* Style pour le bouton Return to Home */
+        .return-home-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .return-home-btn {
+            background-color: #4CAF50; /* Couleur verte */
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .return-home-btn:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        /* Styles responsive */
+        @media (max-width: 600px) {
+            .return-home-btn {
+                width: 100%; 
+                padding: 12px 0; 
+            }
+        }
+        
+        
     </style>
 </head>
 <body>
-    
     <form action="send.php" method="post">
         <label for="email">Email</label>
-        <input type="email" name="email" id="email" required>
+        <input type="email" name="email" id="email" placeholder="Write admin email : itzhoucem@gmail.com here">
 
         <label for="subject">Subject</label>
-        <input type="text" name="subject" id="subject" required>
+        <input type="text" name="subject" id="subject" placeholder="Write your email here">
 
         <label for="message">Message</label>
-        <input type="text" name="message" id="message" required>
+        <input type="text" name="message" id="message" placeholder="Describe your feedback about the website here">
 
         <button type="submit" name="send">Send</button>
     </form>
     <div class="footer">
         <p>&copy; 2024 All Rights Reserved by GreenHarvest.</p>
+    </div>
+
+    <div class='return-home-container'>
+        <a href='/projet-web/FrontOffice/home.html'>
+            <button class='return-home-btn'>Return to Home</button>
+        </a>
     </div>
 </body>
 </html>
