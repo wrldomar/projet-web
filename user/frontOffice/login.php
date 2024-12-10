@@ -40,19 +40,24 @@
             color: #0056b3;
             text-decoration: underline;
         }
+        #email, #password {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
     </style>
 </head>
 <body>
   <div class="login-container">
     <h2>Sign In</h2>
     <form action="" method="post" onsubmit="return valider()">
-      <input type="text" placeholder="First Name" name="firstName" id="n1">
-      <input type="text" placeholder="Last Name" name="lastName" id="n2">
+      <input type="email" placeholder="Email" name="email" id="email">
+      <input type="password" placeholder="Password" name="password" id="password">
       <br><br>
       <button type="submit">Sign In</button>
-      <a href="home.html">
-        <button type="button" class="logout-button">Sign Out</button>
-      </a>
     </form>
     <br>
     <a href="/projet-web/BackOffice/view/userForm.php" class="create-account">Create an account</a>
@@ -61,14 +66,14 @@
 include $_SERVER['DOCUMENT_ROOT'] . '/projet-web/BackOffice/controller/UserController.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nom = isset($_POST['firstName']) ? trim($_POST['firstName']) : '';
-    $prenom = isset($_POST['lastName']) ? trim($_POST['lastName']) : '';
+    $email = isset($_POST['email']) ? trim($_POST['email']) : '';
+    $password = isset($_POST['password']) ? trim($_POST['password']) : '';
 
     $userController = new UserController();
-    $user = $userController->getUserByName($nom, $prenom);
+    $user = $userController->getUserByEmail($email, $password);
 
-    if ($user && isset($user['nom']) && isset($user['prenom'])) {
-        echo "<div class='success-message'>Welcome, " . htmlspecialchars($user['nom']) . " " . htmlspecialchars($user['prenom']) . "!</div>";
+    if ($user && isset($user['email']) && isset($user['pass'])) {
+        echo "<div class='success-message'>Welcome to your account !</div>";
         
         echo "<script>
                 setTimeout(function() {
@@ -76,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }, 2000); 
               </script>";
     } else {
-        echo "<div class='error-message'>User not registered!</div>";
+        echo "<div class='error-message'>User not registered !</div>";
     }
 }
 ?>
