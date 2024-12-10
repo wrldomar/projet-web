@@ -70,8 +70,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type='text' name='nom' value='{$user['nom']}'>
                 <label>Last Name:</label>
                 <input type='text' name='prenom' value='{$user['prenom']}'>
-                <label>Date of Birth:</label>
-                <input type='date' name='dateNaissance' value='{$user['dateNaissance']}'>
                 <label>Type:</label>
                 <input type='text' name='type' value='{$user['type']}'>
                 <label>Email:</label>
