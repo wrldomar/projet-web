@@ -95,9 +95,39 @@ echo "
         margin-top: 10px;
         margin-right: 500px;
     }
+
+    /* Style pour le bouton Return to Home */
+    .return-home-container {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .return-home-btn {
+        background-color: #4CAF50; /* Couleur verte */
+        color: white;
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .return-home-btn:hover {
+        background-color: #45a049; /* Légère variation de couleur au survol */
+        transform: scale(1.05); /* Effet de zoom au survol */
+    }
+
+    /* Styles responsive */
+    @media (max-width: 600px) {
+        .return-home-btn {
+            width: 100%; /* Largeur complète sur les petits écrans */
+            padding: 12px 0; /* Ajuster les marges et la taille du texte */
+        }
+    }
 </style>
 ";
-//echo "<h2>Search Users</h2>";
+
 echo "
 <input type='text' id='searchInput' class='search-bar' placeholder='Search by Name, Last Name, or Email' onkeyup='filterTable()'>";
 
@@ -109,7 +139,6 @@ echo "
 </p>";
 
 // Script JavaScript pour filtrer les données
-
 echo "
 <script>
     function filterTable() {
@@ -148,12 +177,10 @@ echo "<table >
             <th>ID</th>
             <th>Name</th>
             <th>Last Name</th>
-            <th>Date of Birth</th>
             <th>Type</th>
             <th>Email</th>
             <th>Phone</th>
             <th>Action</th>
-
         </tr>";
 
 foreach ($list as $row) {
@@ -162,7 +189,6 @@ foreach ($list as $row) {
                 <td>{$row['id']}</td>
                 <td>{$row['nom']}</td>
                 <td>{$row['prenom']}</td>
-                <td>{$row['dateNaissance']}</td>
                 <td>{$row['type']}</td>
                 <td>{$row['email']}</td>
                 <td>{$row['telephone']}</td>
@@ -189,7 +215,6 @@ echo "<table>
             <th>ID</th>
             <th>Name</th>
             <th>Last Name</th>
-            <th>Date of Birth</th>
             <th>Type</th>
             <th>Email</th>
             <th>Phone</th>
@@ -202,7 +227,6 @@ foreach ($list as $row) {
                 <td>{$row['id']}</td>
                 <td>{$row['nom']}</td>
                 <td>{$row['prenom']}</td>
-                <td>{$row['dateNaissance']}</td>
                 <td>{$row['type']}</td>
                 <td>{$row['email']}</td>
                 <td>{$row['telephone']}</td>
@@ -220,4 +244,14 @@ foreach ($list as $row) {
     }
 }
 echo "</table>";
+
+echo "
+<!-- Bouton Return to Home -->
+<div class='return-home-container'>
+    <a href='/projet-web/FrontOffice/home.html'>
+        <button class='return-home-btn'>Return to Home</button>
+    </a>
+</div>
+";
+
 ?>
