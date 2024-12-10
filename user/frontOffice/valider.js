@@ -1,17 +1,16 @@
-function valider()
+function valider() {
+    let mail = document.getElementById("email").value;
+    let pass = document.getElementById("password").value;
 
-{
-    let name1 = document.getElementById("n1").value;
-    let name2 = document.getElementById("n2").value;
-    if(name1 == "")
-    {
-        alert("First Name required!!")
-        return false
+    if(mail == "") {
+        alert("Mail required!!");
+        return false;
     }
-    if(name2 == "")
-    {
-        alert("Last Name required!!")
-        return false
-     }
 
+    if(pass == "") {
+        alert("Password required!!");
+        return false; 
+    }
+
+    return true; 
 }
