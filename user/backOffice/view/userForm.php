@@ -228,8 +228,8 @@
             <button type="submit" name="register">Register</button>
         </form>
         <div class='return-home-container'>
-            <a href='/projet-web/FrontOffice/home.html'>
-        <button class='return-home-btn'>Return to Home</button></a></div>
+            <a href='/projet-web/FrontOffice/login.php'>
+        <button class='return-home-btn'>Return to Sign in</button></a></div>
         <?php 
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
             echo "<div class='success-message'>User added successfully!</div>";
