@@ -1,33 +1,50 @@
 <?php
-// Use the correct credentials for your MySQL database
-$servername = 'localhost';
-$username = 'root';  // Use the correct username, typically 'root' for XAMPP
-$password = '';  // Use the correct password, '' if no password is set
-$dbname = 'products';  // Ensure this matches your database name
-
-// Create the connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check for connection errors
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+// Include the necessary configuration and session initialization
+include '../../config/config.php';
+session_start();
 
 // Delete comment logic
-if (isset($_GET['id_comment'])) {  // Use 'id_comment' based on your table structure
-    $commentId = $_GET['id_comment'];
-    $sql = "DELETE FROM product_comments WHERE id_comment = ?";  // Use 'id_comment' here as well
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $commentId);
-    $stmt->execute();
-    header("Location: infoProduct.php"); // Redirect to 'infoProduct.php' after deletion
-    exit(); // Don't forget to call exit after header redirection
+if (isset($_GET['id_comment'])) {  
+    $commentId = filter_input(INPUT_GET, 'id_comment', FILTER_VALIDATE_INT);
+
+    if ($commentId) {
+        try {
+            // Get PDO connection from config class
+            $pdo = config::getConnexion();
+
+            // Prepare and execute the DELETE statement
+            $stmt = $pdo->prepare("DELETE FROM product_comments WHERE id_comment = ?");
+            $stmt->execute([$commentId]);
+
+            // Redirect to the comments page after deletion
+           // header("Location: comments.php");
+            exit();
+        } catch (PDOException $e) {
+            echo "Error deleting comment: " . $e->getMessage();
+        }
+    }
 }
 
 // Fetch comments from the database
-$sql = "SELECT * FROM product_comments"; // Make sure this matches your table name
-$result = $conn->query($sql);
+try {
+    // Get PDO connection from config class
+    $pdo = config::getConnexion();
+
+    // Prepare and execute the SELECT statement
+    $stmt = $pdo->query("SELECT * FROM product_comments ORDER BY created_at DESC");
+    $comments = $stmt->fetchAll();
+} catch (PDOException $e) {
+    echo "Error fetching comments: " . $e->getMessage();
+    $comments = [];
+}
 ?>
+
+
+
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">

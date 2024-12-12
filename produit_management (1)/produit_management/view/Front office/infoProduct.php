@@ -1,23 +1,8 @@
 <?php
-// Include the ProductController class
+// Include the necessary classes
 include '../../controller/productcontroller.php';
+include '../../config/config.php';
 session_start();
-
-// Database credentials
-$host = '127.0.0.1'; // or 'localhost'
-$dbname = 'products'; // Your actual database name
-$username = 'root'; // Default MySQL username for XAMPP (if you're using XAMPP, this is usually 'root')
-$password = ''; // Default password is empty for root in XAMPP
-
-try {
-    // Create a PDO instance and establish the connection
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    // Set the PDO error mode to exception
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    // Catch and handle any connection errors
-    die("Connection failed: " . $e->getMessage());
-}
 
 // Get and sanitize the product ID from the query parameter
 $productId = filter_input(INPUT_GET, 'id_product', FILTER_VALIDATE_INT);
@@ -42,12 +27,19 @@ if (!$product) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['comment'])) {
     $userName = htmlspecialchars(trim($_POST['user_name']));
     $commentText = htmlspecialchars(trim($_POST['comment']));
-    $rating = isset($_POST['rating']) ? (int) $_POST['rating'] : 0;
+    $rating = isset($_POST['rating']) ? (int)$_POST['rating'] : 0;
 
     if (!empty($userName) && !empty($commentText)) {
-        // Insert new comment with rating into the database
-        $stmt = $pdo->prepare("INSERT INTO product_comments (id_product, user_name, comment, rating) VALUES (?, ?, ?, ?)");
-        $stmt->execute([$productId, $userName, $commentText, $rating]);
+        try {
+            // Get PDO connection from config class
+            $pdo = config::getConnexion();
+
+            // Insert new comment with rating into the database
+            $stmt = $pdo->prepare("INSERT INTO product_comments (id_product, user_name, comment, rating) VALUES (?, ?, ?, ?)");
+            $stmt->execute([$productId, $userName, $commentText, $rating]);
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
     }
 
     // Redirect after form submission to avoid duplicate posting
@@ -55,12 +47,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['comment'])) {
     exit;
 }
 
-
 // Fetch all comments for the product
-$stmt = $pdo->prepare("SELECT * FROM product_comments WHERE id_product = ? ORDER BY created_at DESC");
-$stmt->execute([$productId]);
-$comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+try {
+    // Get PDO connection from config class
+    $pdo = config::getConnexion();
+
+    $stmt = $pdo->prepare("SELECT * FROM product_comments WHERE id_product = ? ORDER BY created_at DESC");
+    $stmt->execute([$productId]);
+    $comments = $stmt->fetchAll();
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+    $comments = [];
+}
 ?>
+
 
 
 
