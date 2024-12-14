@@ -1,0 +1,592 @@
+﻿/* General Body Styling */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  background-image: url('assets/backG.png'); /* Background image */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* Stabilizes the background */
+  width: 100%;
+  min-height: 100vh; /* Allows body to extend beyond viewport if needed */
+  overflow-x: hidden; /* Prevents horizontal scroll */
+  overflow-y: auto; /* Allows vertical scrolling */
+  transition: background-color 2s ease; /* Smooth transition for background color */
+
+}
+
+/* Ensure the body is hidden initially to create the fade-in effect */
+body.fade-in {
+  opacity: 0; /* Initially hidden */
+  transition: opacity 2s ease-in-out; /* Smooth transition for fading in */
+}
+
+/* When the page has fully loaded, change the opacity to 1 */
+body.fade-in.loaded {
+  opacity: 1;
+}
+
+
+/* You can add a specific transition effect when hovering on the body */
+body:hover {
+  background-color: #f0f0f0; /* Light grey background on hover */
+}
+
+/* Header Section */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px; /* Adjust padding for spacing */
+  background-color: rgba(255, 255, 255, 0.733);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  height: 70px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border-bottom: 2px solid #000;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Hidden header when scrolling */
+.header-hidden {
+  transform: translateY(-100%);
+}
+
+/* Logo and Header Content Styling */
+.logo {
+  display: flex;
+  align-items: center;
+  font-family: 'NewYork', serif;
+  font-size: 36px;
+  color: rgb(0, 0, 0);
+  position: absolute; /* Center the logo */
+  left: 50%;
+  transform: translateX(-50%); /* Center the logo horizontally */
+}
+
+/* Logo Styling */
+.logo h1 {
+  font-family: 'NewYork', serif;
+  font-size: 40px;
+  text-align: center;
+  margin: 0;
+  color: rgb(0, 0, 0);
+}
+
+.green {
+  color: green;
+}
+
+.harvest {
+  color: black;
+}
+
+.nav-logo {
+  width: 30px;
+  height: auto;
+  margin-left: 10px;
+  transition: transform 0.3s ease;
+}
+
+.nav-logo:hover {
+  transform: scale(1.1);
+}
+
+/* Header Content Layout */
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+/* Left and Right Menu Links */
+.left-content, .right-content {
+  display: flex;
+  gap: 40px;
+  position: absolute;
+}
+
+.left-content {
+  left: 20px; /* Position the left content at the left */
+}
+
+.right-content {
+  right: 20px; /* Position the right content at the right */
+}
+
+.left-content .link, .right-content .link {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+.left-content .link:hover, .right-content .link:hover {
+  color: #007b3e;
+}
+
+/* Logo Image Styling */
+.logo-link {
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.logo-img {
+  width: 50px;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.logo-img:hover {
+  transform: scale(1.2);
+}
+
+
+
+
+/* Content Section Styling */
+.content {
+  position: fixed;
+  left: 250px;
+  font-style: Supernatural Knight;
+  max-width: 800px;
+  text-align: center;
+  margin-top: 80px; /* Space for the fixed header */
+  padding: 20px;
+  position: relative;
+  z-index: 1; /* Ensures the content stays above the background */
+}
+
+.content h1 {
+  letter-spacing: 25px;
+  font-family: 'Supernatural Knight', sans-serif; /* Use Supernatural Knight font */
+  font-size: 100px; /* Make the text big */
+  color: rgba(153, 21, 21, 0.973); /* Set text color to red */
+  margin-bottom: 150px;
+}
+
+.content h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.content p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.content button {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.content button:hover {
+  background-color: darkgreen;
+  transform: scale(1.05);
+}
+
+/* Image Section - Positioned in the center */
+.produce-images {
+  display: flex;
+  left: 255px;
+  top: 80px;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 30px; /* Adds space between the text and images */
+  position: relative;
+  z-index: 0; /* Ensure images stay behind text */
+}
+
+.produce-images img {
+  max-width: 100%;
+  height: auto;
+  max-height: 150px; /* Limit the height of images */
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Hover Animation (scales the image slightly when the cursor is over it) */
+.produce-images img {
+  transition: transform 0.3s ease-in-out; /* Smooth transition for hover */
+}
+
+.produce-images img:hover {
+  transform: scale(1.1); /* Slightly increase the size on hover */
+}
+
+/* Click Animation (scales the image more when clicked) */
+.produce-images img.clicked {
+  transform: scale(1.5); /* Zoom the image in more when clicked */
+  transition: transform 0.3s ease-in-out; /* Smooth transition for click */
+}
+
+
+
+/* Text Overlay Styling */
+.text-overlay {
+  line-height: 2;
+  position: absolute;
+  top: 330px; /* Adjust position to place the text over the images */
+  right:5px; /* Center the text horizontally */
+  transform: translateX(-50%); /* Center the text horizontally */
+  color: white; /* Default text color */
+  z-index: 1; /* Ensure text is above images */
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for readability */
+  border-radius: 10px;
+  max-width: 500px; /* Limit the width of the text block */
+}
+
+.text-overlay h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: rgb(206, 206, 206); /* Set text color to green */
+}
+
+.text-overlay p {
+  font-size: 14px;
+}
+
+/* Button Styles */
+.text-overlay button {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.text-overlay button:hover {
+  background-color: darkgreen;
+  transform: scale(1.05);
+}
+
+
+/* Big Shop Button Styling */
+.big-shop-button-container {
+  position: relative;
+  left: 150px;
+  bottom: 100px; /* Position button near the bottom of the screen */
+  /* Ensure the button is above other content */
+}
+
+.big-shop-btn {
+  text-decoration: none;
+  background: linear-gradient(45deg, #1b4b05, #19aa14); /* Gradient background */
+  color: white;
+  border: 2px solid #0c7e3f; /* Border color */
+  padding: 20px 50px; /* Large padding for a bigger button */
+  font-size: 30px; /* Large font size */
+  font-weight: bold;
+  text-transform: uppercase; /* Uppercase text */
+  letter-spacing: 2px;
+  border-radius: 50px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  outline: none; /* Remove outline on focus */
+}
+
+.big-shop-btn:hover {
+  background: linear-gradient(45deg, #025019d8, #22dd31ef); /* Reverse gradient on hover */
+  box-shadow: 0 8px 20px rgba(7, 121, 35, 0.5); /* Glowing effect on hover */
+  transform: scale(1.1); /* Increase size on hover */
+}
+
+.big-shop-btn:focus {
+  border-color: #026b31;
+  box-shadow: 0 0 15px #058120; /* Glowing border */
+}
+
+.big-shop-btn:active {
+  transform: scale(0.95); /* Shrink slightly on click */
+}
+
+/* Link Styling with Hover Transition */
+.left-content .link, .right-content .link {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  font-size: 18px;
+  transition: color 0.3s ease, transform 0.3s ease; /* Added transition for smooth effect */
+}
+
+.left-content .link:hover, .right-content .link:hover {
+  color: #007b3e;
+  transform: scale(1.1); /* Adds a slight zoom effect when hovered */
+}
+
+
+/* Dropdown Container */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+/* Group 8 and Events Image Hover */
+.dropdown:hover .logo-img {
+  transform: scale(1.1); /* Slightly enlarge the image */
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%; /* Position below the Events image or link */
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  min-width: 150px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 10;
+}
+
+/* Hover to Show Dropdown */
+.dropdown:hover .dropdown-menu {
+  display: block;
+  opacity: 1;
+  transform: translateY(0); /* Slide up animation */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+}
+
+/* Dropdown Links */
+.dropdown-menu .dropdown-link {
+  color: #333;
+  padding: 12px 16px;
+  display: block;
+  text-decoration: none;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover Effect for Dropdown Links */
+.dropdown-menu .dropdown-link:hover {
+  background-color: #19aa14;
+  color: white;
+  transform: scale(1.05); /* Slightly enlarge the link on hover */
+}
+
+/* Dropdown Animation */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Mission and Vision Section */
+.mission-vision {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 30px 40px; /* Increased padding for larger background */
+  width: 100%; /* Full width of the parent container */
+  max-width: 1200px; /* Optional: Set a maximum width for better layout control */
+  margin: 20px auto;
+  background-color: #f0f0f0;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  gap: 30px;
+  visibility: hidden;
+  border-radius: 15px; /* Slightly larger border radius */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Larger shadow for depth */
+}
+
+/* Title above sections */
+.titlems {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 30px; /* Increased space between title and sections */
+}
+
+.titlems h2 {
+  font-size: 28px; /* Increased font size */
+  line-height: 1.5;
+  color: #000;
+  margin: 0;
+}
+
+/* Individual Section Styling */
+.section1, .section2 {
+  width: 48%; /* Equal width for both sections */
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mission-vision.visible {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0.5s;
+}
+
+.section1 h2, .section2 h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #4CAF50;
+}
+
+.section1 .para, .section2 .para {
+  font-size: 16px;
+  color: #000000;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .mission-vision {
+    padding: 40px 20px; /* Adjust padding on smaller screens */
+  }
+
+  .section1, .section2 {
+    width: 100%;
+    padding: 20px;
+  }
+}
+
+
+
+.footer {
+  background-color: #2c4b31;
+  color: #fff;
+  padding: 40px 180px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeIn 1.5s forwards;
+}
+
+.footer div {
+  margin: 10px;
+  max-width: 250px;
+  animation: slideUp 1s ease-out;
+  opacity: 0;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.footer h3 {
+  margin-bottom: 15px;
+  animation: fadeInUp 1s ease-out;
+  opacity: 0;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
+}
+
+.footer p, .footer a {
+  color: #fff;
+  text-decoration: none;
+  margin: 5px 0;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.footer a:hover {
+  color: #4CAF50;
+  transform: scale(1.1);
+}
+
+.footer input[type="email"] {
+  padding: 5px;
+  margin-right: 5px;
+  border: none;
+}
+
+.footer button {
+  padding: 5px 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  animation: buttonPulse 1s infinite alternate;
+}
+
+.footer .bottom {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  border-top: 1px solid #fff;
+  padding-top: 10px;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out;
+  animation-delay: 1.5s;
+  animation-fill-mode: forwards;
+}
+
+.footer .bottom a {
+  margin: 0 10px;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.footer .bottom a:hover {
+  color: #4CAF50;
+  transform: scale(1.1);
+}
+
+/* Keyframes for animations */
+@keyframes fadeIn {
+  to {
+      opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+  from {
+      transform: translateY(20px);
+  }
+}
+
+@keyframes slideUp {
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+  from {
+      transform: translateY(20px);
+  }
+}
+
+@keyframes buttonPulse {
+  from {
+      transform: scale(1);
+  }
+  to {
+      transform: scale(1.1);
+  }
+}
+
