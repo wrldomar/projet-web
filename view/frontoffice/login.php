@@ -91,19 +91,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $redirectPage = 'home.html';
         if ($user['type'] === 'farmer') {
-            $redirectPage = 'add_event.php';
-        } elseif ($user['type'] === 'farmer') {
-            $redirectPage = 'addingproduct.php';
+            // Redirection multiple pour les farmers
+            echo "<div class='success-message'>Welcome, {$_SESSION['user']['nom']}! Redirecting...</div>";
+            echo "<script>
+                    setTimeout(function() {
+                        window.location.href = 'add_event.php';
+                    }, 2000);
+
+                    setTimeout(function() {
+                        window.location.href = 'addingproduct.php';
+                    }, 5000);
+                  </script>";
         } elseif ($user['type'] === 'client') {
             $redirectPage = 'eventacc.php';
+            echo "<script>
+                    setTimeout(function() {
+                        window.location.href = '$redirectPage';
+                    }, 2000);
+                  </script>";
         }
-
-        echo "<div class='success-message'>Welcome, {$_SESSION['user']['nom']}! Redirecting...</div>";
-        echo "<script>
-                setTimeout(function() {
-                    window.location.href = '$redirectPage';
-                }, 2000);
-              </script>";
     } else {
         echo "<div class='error-message'>User not registered, incorrect password, or invalid user type!</div>";
     }
