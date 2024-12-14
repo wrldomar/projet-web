@@ -54,13 +54,14 @@
   <div class="login-container">
     <h2>Sign In</h2>
     <form action="" method="post" onsubmit="return valider()">
-      <input type="email" placeholder="Email" name="email" id="email">
-      <input type="password" placeholder="Password" name="password" id="password">
+      <input type="email" placeholder="Email" name="email" id="email" required>
+      <input type="password" placeholder="Password" name="password" id="password" required>
       <br><br>
       <button type="submit">Sign In</button>
     </form>
     <br>
     <a href="userForm.php" class="create-account">Create an account</a>
+
 <?php
 session_start(); // Démarrer une session PHP
 
@@ -80,22 +81,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $userController = new UserController();
     $user = $userController->getUserByEmail($email, $password);
 
-    if ($user && isset($user['email']) && isset($user['pass'])) {
+    if ($user && isset($user['email']) && isset($user['pass']) && isset($user['type'])) {
         // Stocker les informations de l'utilisateur dans la session
         $_SESSION['user'] = [
             'email' => $user['email'],
-            'nom' => $user['nom'] ?? 'User' 
+            'nom' => $user['nom'] ?? 'User',
+            'type' => $user['type']
         ];
 
-        echo "<div class='success-message'>Welcome to your account, {$_SESSION['user']['nom']}!</div>";
-        
+        $redirectPage = 'home.html';
+        if ($user['type'] === 'farmer') {
+            $redirectPage = 'add_event.php';
+        } elseif ($user['type'] === 'farmer') {
+            $redirectPage = 'addingproduct.php';
+        } elseif ($user['type'] === 'client') {
+            $redirectPage = 'eventacc.php';
+        }
+
+        echo "<div class='success-message'>Welcome, {$_SESSION['user']['nom']}! Redirecting...</div>";
         echo "<script>
                 setTimeout(function() {
-                    window.location.href = 'home.html';
-                }, 2000); 
+                    window.location.href = '$redirectPage';
+                }, 2000);
               </script>";
     } else {
-        echo "<div class='error-message'>User not registered or incorrect password!</div>";
+        echo "<div class='error-message'>User not registered, incorrect password, or invalid user type!</div>";
     }
 }
 ?>
