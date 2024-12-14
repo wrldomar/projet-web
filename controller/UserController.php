@@ -108,7 +108,7 @@ public function getUserByEmail($email,$pass) {
     try {
         $conn = Config::getConnection();
         if ($conn) {
-            $sql = "SELECT email , pass FROM users WHERE email = ? AND pass = ?";
+            $sql = "SELECT * FROM users WHERE email = ? AND pass = ?";
             $stmt = $conn->prepare($sql);
             $stmt->execute([$email, $pass]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -149,7 +149,22 @@ public function updateUserPassword($id, $pass, $conf) {
         die("Erreur lors de la mise à jour du mot de passe de l'utilisateur : " . $e->getMessage());
     }
 }
- 
+
+// Fonction pour récupérer un utilisateur par son type
+public function getUsersByType($type) {
+    try {
+        $conn = Config::getConnection();
+        if ($conn) {
+            $sql = "SELECT * FROM users WHERE type = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([$type]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+    } catch (PDOException $e) {
+        die("Erreur lors de la récupération des utilisateurs par type : " . $e->getMessage());
+    }
+    return [];
+}
 
 }
 
