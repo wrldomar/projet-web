@@ -1,0 +1,123 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: rgb(149, 189, 149);
+    color: #2e4d2e; /* Dark green text */
+}
+
+/* Heading styles */
+h1 {
+    text-align: center;
+    color: #306030; /* Rich green */
+    margin-bottom: 20px;
+    font-size: 2em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: #fff; /* White background for contrast */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+table th, table td {
+    padding: 15px;
+    text-align: left;
+    border: 1px solid #b3d7b3; /* Light green border */
+}
+
+table th {
+    background-color: #4caf50; /* Green header */
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+table tr:nth-child(even) {
+    background-color: #e6f7e6; /* Very light green for alternate rows */
+}
+
+table tr:hover {
+    background-color: #ccf0cc; /* Slightly darker green on hover */
+}
+
+/* Button styling */
+button {
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #4caf50; /* Green button */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #3e8e41; /* Darker green on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+button:active {
+    background-color: #2e6d2e; /* Even darker green on click */
+    transform: translateY(0); /* Reset lift on click */
+}
+
+/* Insert product button */
+button + button {
+    margin-left: 10px;
+}
+
+/* Table footer styling (if needed) */
+tfoot {
+    background-color: #e6f7e6; /* Matching the even rows */
+    font-weight: bold;
+    text-align: right;
+    padding: 10px;
+    color: #2e4d2e;
+}
+
+/* Links within the table (if any) */
+a {
+    color: #4caf50;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Additional container styling */
+.container {
+    margin: auto;
+    max-width: 1200px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+#product-column {
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    padding: 0;
+    text-align: left;
+}
+
+h3 {
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+    font-size: 2em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}

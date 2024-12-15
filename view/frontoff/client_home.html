@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="front.css" />
+    <title>GreenHarvest</title>
+    <script src="home.js" defer></script>
+
+    <style>
+      /* Styles for the video splash screen */
+      #splash-video {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 9999;
+      }
+
+      /* Hide main content initially */
+      #main-content {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Splash Video -->
+    <video id="splash-video" autoplay muted playsinline>
+      <source src="GH.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+
+    <!-- Main Website Content -->
+    <div id="main-content">
+      <header id="header">
+        <div class="header-content">
+          <div class="left-content">
+            <a href="../Home/home.html" class="link">Home</a>
+            <div class="dropdown">
+              <a href="listcategories.php" class="link">Shop</a>
+              <div class="dropdown-menu"></div>
+            </div>
+          </div>
+          <div class="logo">
+            <h1>
+              <span class="green">Green</span
+              ><span class="harvest">Harvest</span>
+            </h1>
+          </div>
+          <div class="right-content">
+            <div class="dropdown">
+              <a href="#" class="link">Events</a>
+              <div class="dropdown-menu">
+                <a href="../backoff/eventacc.php" class="dropdown-link"
+                  >View Events</a
+                >
+              </div>
+            </div>
+            <a href="../contact/contact.html" class="link">Contact</a>
+            <div class="dropdown">
+              <a href="#" class="logo-link">
+                <img src="Group 8.png" alt="Group 8 Logo" class="logo-img" />
+              </a>
+              <div class="dropdown-menu">
+                <a href="userForm.php" class="dropdown-link">Sign Up</a>
+                <a href="login.php" class="dropdown-link">Log In</a>
+              </div>
+            </div>
+            <a href="../panier/index.html" class="logo-link">
+              <img src="Group 7.png" alt="Group 7 Logo" class="logo-img" />
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <div class="main-container">
+        <main>
+          <div class="content">
+            <h1>CULTIVATE</h1>
+          </div>
+
+          <div class="produce-images">
+            <a href="../vegetables/vegetables.html">
+              <img src="Rectangle 4.png" alt="Vegetable Image 1" />
+            </a>
+            <img src="Rectangle 5.png" alt="Vegetable Image 2" />
+          </div>
+
+          <div class="text-overlay">
+            <h2>Fresh from Our Fields to Your Table</h2>
+            <p>
+              Discover the taste of farm-fresh vegetables grown with care and
+              delivered to you. Enjoy quality produce that’s as nutritious as it
+              is delicious—straight from our fields, for a healthier, greener
+              lifestyle.
+            </p>
+          </div>
+        </main>
+
+        <div class="big-shop-button-container">
+          <a href="listcategories.php">
+            <button class="big-shop-btn">Shop Now</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="mission-vision" id="mission-vision">
+        <div class="titlems">
+          <h2>
+            Bringing Nature's Best to Your Table.<br />Cultivating Freshness
+            Since 2005.
+          </h2>
+        </div>
+
+        <div class="section1">
+          <h3 class="vision">Mission</h3>
+          <p class="para">
+            Deliver exceptional produce while preserving the environment for
+            future generations.
+          </p>
+        </div>
+
+        <div class="section2">
+          <h3 class="vision">Vision</h3>
+          <p class="para">
+            To be a leader in sustainable agriculture, enhancing the health and
+            well-being of our community.
+          </p>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div>
+          <h3>About us</h3>
+          <p>
+            Green Harvest is committed to bringing fresh, sustainably grown
+            vegetables directly from our fields to your table. Join us on a
+            journey towards healthier eating and a greener planet.
+          </p>
+        </div>
+        <div>
+          <h3>Quick Links</h3>
+          <a href="#">Home</a><br />
+          <a href="listcategories.php">Shop</a><br />
+          <a href="#">About Us</a><br />
+          <a href="/view/back/eventacc.php">Events</a><br />
+          <a href="#">Contact Us</a><br />
+          <a href="#">FAQs</a><br />
+          <a href="#">Blog</a>
+        </div>
+        <div>
+          <h3>Contact Us</h3>
+          <p>Phone: +216 xx xxx xxx</p>
+          <p>
+            Email:
+            <a href="mailto:info@greenharvest.com">info@greenharvest.com</a>
+          </p>
+          <p>Address: 123 Greenfield Lane, Farmtown, USA</p>
+          <p>Business Hours: Monday - Friday: 9 AM - 5 PM</p>
+        </div>
+        <div>
+          <h3>Follow Us</h3>
+          <p>
+            <a href="#"
+              ><img
+                src="/view/front/asset/facebook.png"
+                alt="Facebook"
+                width="20"
+            /></a>
+            <a href="#"
+              ><img
+                src="/view/front/asset/twitter.png"
+                alt="Twitter"
+                width="20"
+            /></a>
+            <a href="#"
+              ><img
+                src="/view/front/asset/instagram.png"
+                alt="Instagram"
+                width="20"
+            /></a>
+          </p>
+          <h3>Newsletter Signup</h3>
+          <p>
+            Stay up-to-date with the latest from Green Harvest! Sign up for our
+            newsletter to receive fresh product updates, events, and exclusive
+            offers.
+          </p>
+          <input type="email" placeholder="Enter your email" />
+          <button>Subscribe</button>
+        </div>
+        <div class="bottom">
+          <p>© 2024 Green Harvest. All rights reserved.</p>
+          <a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a> |
+          <a href="#">Refund Policy</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
