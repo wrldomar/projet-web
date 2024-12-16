@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 15, 2024 at 06:12 PM
+-- Generation Time: Dec 16, 2024 at 01:00 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -96,7 +96,12 @@ CREATE TABLE `event` (
 --
 
 INSERT INTO `event` (`id_event`, `id_fermier`, `nom_event`, `location_event`, `describtion`, `Date`, `heure`, `duration`, `Max_Tickets`, `Ticket_price`, `Status`, `image_url`) VALUES
-(76, 33, 'azer', 'azer', '12', '2024-12-13', '12', '12', 12, 12, 1, '../frontoff/uploads/675edc6f78c02_full_ebook_moussa.png');
+(57, 15, 'AgriTech Summit', 'azer', 'Tunis, Tunisia', '2024-11-28', '12', '2', 100, 10, 1, 'uploads/675f526468b1b_20210323_1616515136-275519.jpg'),
+(58, 333, 'Green Grow Expo', 'Sousse, Tunisia', 'An expo highlighting', '2024-12-02', '11', '450', 1221, 12, 1, 'uploads/675f5334a6576_4th-forum-on-best-practices.jpg.webp'),
+(59, 44, 'AgriVision Tunisia C', 'Hammamet, Tunisia', 'A conference that br', '2024-12-11', '12', '21', 22, 11, 1, 'uploads/675f535a85a56_Screen-Shot-2021-09-21-at-10.31.00-AM-300x199.png'),
+(60, 55, 'Harvest Horizons Tun', 'Monastir, Tunisia', 'A forward-thinking e', '2024-12-04', '11', '12', 12, 12, 1, 'uploads/675f537a91b1d_images (3).jpg'),
+(61, 66, 'SustainAgri Forum Tu', 'Djerba, Tunisia', 'A forward-thinking e', '2024-12-17', '12', '12', 12, 12, 1, 'uploads/675f5391a0c86_images (2).jpg'),
+(64, 333, 'SustainAgri Forum Tu', 'Djerba, Tunisia', 'A forum focusing on ', '2024-12-11', '11', '2', 1, 10, 1, 'uploads/675f53ad970f0_images (3).jpg');
 
 -- --------------------------------------------------------
 
@@ -112,6 +117,13 @@ CREATE TABLE `panier` (
   `idcommande` int(11) DEFAULT NULL,
   `id_product` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `panier`
+--
+
+INSERT INTO `panier` (`idpanier`, `quantity`, `prixtotal`, `iduser`, `idcommande`, `id_product`) VALUES
+(4, 1, 1000, 1, NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -134,16 +146,8 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id_product`, `id_farmer`, `id_categorie`, `name_product`, `product_price`, `quantite`, `product_image`) VALUES
-(49, 21, 2, 'potato', 2300.00, 3.00, 'uploads/6754a1704e1b8_image_2024-12-07_202636462.png'),
-(50, 32, 1, 'orange', 4000.00, 2.00, 'uploads/6754a18fd3966_image_2024-12-07_202709116.png'),
-(51, 2, 1, 'mango', 3500.00, 2.00, 'uploads/6754a1c428971_image_2024-12-07_202800711.png'),
-(52, 3, 1, 'banana', 5600.00, 1.00, 'uploads/6754a1e151736_image_2024-12-07_202831323.png'),
-(53, 56, 1, 'strawberies', 4500.00, 1.00, 'uploads/6754a209333b2_image_2024-12-07_202910173.png'),
-(54, 445, 1, 'watermelon', 2000.00, 1.00, 'uploads/6754a2359935e_image_2024-12-07_202955010.png'),
-(55, 23, 1, 'pineapple', 6000.00, 1.00, 'uploads/6754a261dd15a_image_2024-12-07_203039597.png'),
-(56, 41, 1, 'kiwi', 2000.00, 1.00, 'uploads/6754a2fa4b0ae_image_2024-12-07_203312050.png'),
-(57, 345, 2, 'tomato', 2000.00, 10.00, 'uploads/67557161e0a69_image_2024-12-08_111351961.png'),
-(58, 3, 3, 'apple', 1200.00, 5.00, 'uploads/6756c4a67d77a_Designer.png');
+(1, 1, 1, 'orange', 1000.00, 4.00, 'uploads/675f260c938cd_transparent-orange-apple5eacfeae85ac29.7815306015883956945475.png'),
+(2, 4, 1, 'mango', 1000.00, 12.00, 'uploads/675f26204b783_product-packshot-mango.jpg');
 
 -- --------------------------------------------------------
 
@@ -159,16 +163,6 @@ CREATE TABLE `product_comments` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `rating` int(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `product_comments`
---
-
-INSERT INTO `product_comments` (`id_comment`, `id_product`, `user_name`, `comment`, `created_at`, `rating`) VALUES
-(31, 50, 'omar', 'great', '2024-12-08 12:49:28', 4),
-(37, 51, 'ahmed', 'bien', '2024-12-09 10:20:24', 3),
-(38, 50, 'aziz', 'great', '2024-12-12 08:18:50', 2),
-(39, 51, 'hyper', 'yser ibnina', '2024-12-15 16:55:52', 4);
 
 -- --------------------------------------------------------
 
@@ -204,13 +198,6 @@ CREATE TABLE `reponse` (
   `date_reponse` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `reponse`
---
-
-INSERT INTO `reponse` (`id_rep`, `idrec`, `reponse`, `date_reponse`) VALUES
-(26, 9, 'yaatek asbaaaa', '2024-12-27');
-
 -- --------------------------------------------------------
 
 --
@@ -233,7 +220,27 @@ CREATE TABLE `reservations` (
 --
 
 INSERT INTO `reservations` (`id_reservation`, `id_event`, `name`, `last_name`, `email`, `phone_number`, `nbr_tickets`, `price`) VALUES
-(122, 76, 'omar', 'belhaj', 'obelhaj488@gmail.com', '27287765', 2, 40.00);
+(97, 57, 'omar', 'belhaj', 'faresmanai05@gmail.com', '27287765', 2, 40.00),
+(98, 58, 'omar', 'belhaj', 'obelhaj488@gmail.com', '27287765', 1, 20.00),
+(99, 57, 'fares', 'manai', 'faresmanai05@gmail.com', '27287765', 4, 80.00),
+(100, 57, 'fares', 'manai', 'faresmanai05@gmail.com', '27287765', 27, 540.00),
+(101, 57, 'fares', 'manai', 'faresmanai05@gmail.com', '27287765', 27, 540.00),
+(102, 57, 'fares', 'manai', 'faresmanai05@gmail.com', '27287765', 27, 540.00),
+(103, 57, 'fares', 'manai', 'faresmanai05@gmail.com', '27287765', 1, 20.00),
+(104, 57, 'fares', 'manai', 'faresmanai05@gmail.com', '27287765', 2, 40.00),
+(105, 57, 'fares', 'manai', 'faresmanai05@gmail.com', '27287765', 2, 40.00),
+(106, 57, 'fares', 'manai', 'faresmanai05@gmail.com', '27287765', 2, 40.00),
+(107, 57, 'fares', 'manai', 'faresmanai05@gmail.com', '27287765', 2, 40.00),
+(108, 57, 'fares', 'manai', 'faresmanai05@gmail.com', '27287765', 2, 40.00),
+(109, 57, 'fares', 'manai', 'faresmanai05@gmail.com', '27287765', 2, 40.00),
+(110, 57, 'fares', 'manai', 'faresmanai05@gmail.com', '27287765', 2, 40.00),
+(111, 57, 'fares', 'manai', 'faresmanai05@gmail.com', '27287765', 2, 40.00),
+(112, 57, 'aziz', 'abidi', 'Azizgamercr7@gmail.com', '12345678', 3, 60.00),
+(113, 57, 'aziz', 'abidi', 'Azizgamercr7@gmail.com', '12345678', 3, 60.00),
+(114, 58, 'omar', 'belhaj', 'obelhaj488@gmail.com', '27287765', 2, 40.00),
+(115, 64, 'omar', 'belhaj', 'obelhaj488@gmail.com', '27287765', 1, 20.00),
+(116, 64, 'omar', 'belhaj', 'obelhaj488@gmail.com', '27287765', 2, 40.00),
+(117, 64, 'omar', 'belhaj', 'obelhaj488@gmail.com', '27287765', 2, 40.00);
 
 -- --------------------------------------------------------
 
@@ -286,7 +293,9 @@ INSERT INTO `users` (`iduser`, `nom`, `prenom`, `type`, `email`, `telephone`, `p
 (4468, 'omar', 'zz', 'farmer', 'obelhaj433@gmail.com', 33333333, '1234', '1234'),
 (4469, 'Akiko', 'Tabor', 'client', 'obelhaj411@gmail.com', 12345467, '1234', '1234'),
 (4470, 'fares', 'manai', 'client', 'obelhaj422@gmail.com', 12345675, '1234', '1234'),
-(4472, 'Akiko', 'Tabort', 'client', 'obelhaj477@gmail.com', 2132013761, '123', '123');
+(4472, 'Akiko', 'Tabort', 'client', 'obelhaj477@gmail.com', 2132013761, '123', '123'),
+(4474, 'fares', 'manaiI', 'farmer', 'obelhaj4@gmail.com', 272877653, '123', '123'),
+(4476, 'aziz', 'abidi', 'client', 'obelhaj@gmail.com', 2147483647, '123', '123');
 
 --
 -- Indexes for dumped tables
@@ -309,8 +318,7 @@ ALTER TABLE `commande`
 -- Indexes for table `event`
 --
 ALTER TABLE `event`
-  ADD PRIMARY KEY (`id_event`),
-  ADD KEY `id_fermier` (`id_fermier`);
+  ADD PRIMARY KEY (`id_event`);
 
 --
 -- Indexes for table `panier`
@@ -378,19 +386,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id_categorie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_categorie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `commande`
+--
+ALTER TABLE `commande`
+  MODIFY `idcommande` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+
+--
+-- AUTO_INCREMENT for table `panier`
+--
+ALTER TABLE `panier`
+  MODIFY `idpanier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id_product` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id_product` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `product_comments`
@@ -414,13 +434,13 @@ ALTER TABLE `reponse`
 -- AUTO_INCREMENT for table `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `id_reservation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
+  MODIFY `id_reservation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `iduser` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4473;
+  MODIFY `iduser` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4477;
 
 --
 -- Constraints for dumped tables
@@ -439,12 +459,6 @@ ALTER TABLE `panier`
   ADD CONSTRAINT `fk_commande` FOREIGN KEY (`idcommande`) REFERENCES `commande` (`idcommande`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_id_product` FOREIGN KEY (`id_product`) REFERENCES `products` (`id_product`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `user` FOREIGN KEY (`iduser`) REFERENCES `user` (`iduser`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `product_comments`
---
-ALTER TABLE `product_comments`
-  ADD CONSTRAINT `product_comments_ibfk_1` FOREIGN KEY (`id_product`) REFERENCES `products` (`id_product`);
 
 --
 -- Constraints for table `reponse`
