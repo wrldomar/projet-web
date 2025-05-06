@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idcommande'])) {
                 $mail->Username = '';  // Your Gmail address
                 $mail->Password = '';  // Your Gmail password
                 $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
-                $mail->Port = 587;
+                $mail->Port = ;
 
                 // Recipients
                 $mail->setFrom('', 'Green Harvest');
