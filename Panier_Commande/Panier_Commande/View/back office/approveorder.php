@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idcommande'])) {
                 $mail->Port = 587;
 
                 // Recipients
-                $mail->setFrom('mehdibenmoussa6655@gmail.com', 'Green Harvest');
+                $mail->setFrom('', 'Green Harvest');
                 $mail->addAddress($userEmail);  // Add recipient's email address
 
                 // Content
