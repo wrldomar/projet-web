@@ -42,8 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idcommande'])) {
                 $mail->isSMTP();
                 $mail->Host = 'smtp.gmail.com';  // Set the SMTP server to Gmail
                 $mail->SMTPAuth = true;
-                $mail->Username = 'mehdibenmoussa6655@gmail.com';  // Your Gmail address
-                $mail->Password = 'sczx gynt vrsv qpvs';  // Your Gmail password
+                $mail->Username = '';  // Your Gmail address
+                $mail->Password = '';  // Your Gmail password
                 $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port = 587;
 
