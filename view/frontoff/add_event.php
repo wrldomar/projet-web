@@ -68,8 +68,8 @@ if (
                 $mail->isSMTP();
                 $mail->Host = 'smtp.gmail.com';
                 $mail->SMTPAuth = true;
-                $mail->Username = 'obelhaj488@gmail.com';  // Replace with your email
-                $mail->Password = 'ksoa zsug hrlg naos';   // Use a secure app password
+                $mail->Username = '';  
+                $mail->Password = '';   
                 $mail->SMTPSecure = 'ssl';
                 $mail->Port = 465;
 
